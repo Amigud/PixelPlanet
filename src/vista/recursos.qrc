@@ -1,8 +1,8 @@
 <RCC>
   <qresource prefix="prefijoNuevo">
-    <file>imagenes/loginImagen.png</file>
+    <file>../imagenes/loginImagen.png</file>
   </qresource>
   <qresource prefix="prefijoNuevo">
-    <file>logo/logoTienda.jpeg</file>
+    <file>../logo/logoTienda.jpeg</file>
   </qresource>
 </RCC>

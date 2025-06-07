@@ -14,8 +14,8 @@
    <string>LoginEmpleados</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../recursos.qrc">
-    <normaloff>:/prefijoNuevo/logo/logoTienda.jpeg</normaloff>:/prefijoNuevo/logo/logoTienda.jpeg</iconset>
+   <iconset>
+    <normaloff>../logo/logoTienda.jpeg</normaloff>../logo/logoTienda.jpeg</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: qlineargradient(spread:pad, x1:0.493, y1:0, x2:0.488, y2:1, stop:0.273632 rgba(0, 172, 255, 255), stop:1 rgba(0, 45, 255, 255));
@@ -74,7 +74,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="../recursos.qrc">:/prefijoNuevo/imagenes/loginImagen.png</pixmap>
+       <pixmap>../imagenes/loginImagen.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -178,7 +178,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
   </widget>
  </widget>
  <resources>
-  <include location="../recursos.qrc"/>
+  <include location="../vista/recursos.qrc"/>
  </resources>
  <connections/>
 </ui>
