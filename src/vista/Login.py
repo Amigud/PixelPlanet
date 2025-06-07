@@ -5,7 +5,7 @@ from src.controlador.ControladorLogin import ControladorLogin
 class VentanaLogin(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi("UI/Login.ui", self)
+        uic.loadUi("./src/Ui/Login.ui", self)
         self.controlador = ControladorLogin()
         self.botonLogin.clicked.connect(self.intentar_login)
 

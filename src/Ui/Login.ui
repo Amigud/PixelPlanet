@@ -107,7 +107,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit">
+        <widget class="QLineEdit" name="emailEdit">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(255, 255, 255);
 border-radius:5px;</string>
@@ -128,7 +128,7 @@ border-radius:5px;</string>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="ContrasenaEdit">
+        <widget class="QLineEdit" name="contrasenaEdit">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(255, 255, 255);
 border-radius:5px;</string>
@@ -158,7 +158,7 @@ border-radius:5px;</string>
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="BotonAceptar">
+        <widget class="QPushButton" name="botonLogin">
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Login&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>

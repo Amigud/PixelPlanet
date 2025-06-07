@@ -104,3 +104,14 @@ CREATE TABLE speedruns (
     CodEmpleado INT NOT NULL,
     FOREIGN KEY (CodEmpleado) REFERENCES empleados(EmpleadoID)
 );
+
+INSERT INTO empleados (Email, Contrasenia, Rol) VALUES 
+('empleado1@tienda.com', 'password123', 'mostrador'),
+('juegos1@tienda.com', 'gamezone456', 'zona_juegos');
+
+-- Insertar detalles específicos para el empleado de mostrador
+INSERT INTO emp_mostrador (EmpleadoMostrID, NumVentas) VALUES 
+(1, 0); 
+
+INSERT INTO emp_zona_juegos (EmpleadoZDJID, NumTorneos, NumSpeedruns) VALUES 
+(2, 0, 0); 
