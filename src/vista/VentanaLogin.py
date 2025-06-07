@@ -15,7 +15,19 @@ class VentanaLogin(QtWidgets.QMainWindow):
         empleado = self.controlador.validar_credenciales(email, contrasena)
 
         if empleado:
-            QtWidgets.QMessageBox.information(self, "Éxito", f"Bienvenido {empleado.rol}")
+            self.hide()
+
+            if empleado.rol == 'mostrador':
+                #if not self.ventana_mostrador:
+                    #self.ventana_mostrador = VentanaMostrador()
+                #self.ventana_mostrador.show()
+                QtWidgets.QMessageBox.information(self, "Éxito", f"Bienvenido {empleado.rol}")
+        
+            elif empleado.rol == 'zona_juegos':
+                #if not self.ventana_zona_juegos:
+                    #self.ventana_zona_juegos = VentanaZonaJuegos()
+                #self.ventana_zona_juegos.show()
+                print("zona_juegos")
             
         else:
             QtWidgets.QMessageBox.critical(self, "Error", "Credenciales inválidas")
