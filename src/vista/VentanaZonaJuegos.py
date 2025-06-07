@@ -1,25 +1,25 @@
-from PyQt5 import QtWidgets, uic
-from src.vista.dialogs import SpeedrunDialog, TorneoDialog, ZonaJuegoDialog
+from PyQt5 import uic, QtWidgets
+from src.vista.VentanaSpeedrun import VentanaSpeedrun
+
 
 class VentanaZonaJuegos(QtWidgets.QMainWindow):
-    def __init__(self, empleado_id):
+    def __init__(self, empleado):
         super().__init__()
         uic.loadUi("./src/Ui/ZonaJuegos.ui", self)
-        self.empleado_id = empleado_id
+        self.empleado = empleado
+        self.setWindowTitle(f"Zona de Juegos - {self.empleado.email}")
         
-        # Conectar botones
+        
+        self.ventana_speedrun = None
+        self.ventana_torneo = None
+        self.ventana_asignar_zona = None
+        
+        
         self.speedrunBoton.clicked.connect(self.abrir_speedrun)
-        self.torneoBoton.clicked.connect(self.abrir_torneo)
-        self.zonajuegoBoton.clicked.connect(self.abrir_zona_juego)
 
     def abrir_speedrun(self):
-        dialog = SpeedrunDialog(self.empleado_id, self)
-        dialog.exec_()
-
-    def abrir_torneo(self):
-        dialog = TorneoDialog(self.empleado_id, self)
-        dialog.exec_()
-
-    def abrir_zona_juego(self):
-        dialog = ZonaJuegoDialog(self.empleado_id, self)
-        dialog.exec_()
+        self.hide()
+        if not self.ventana_speedrun:
+            self.ventana_speedrun = VentanaSpeedrun(self.empleado, self)
+        self.ventana_speedrun.show()
+        

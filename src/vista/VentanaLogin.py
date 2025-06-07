@@ -24,6 +24,7 @@ class VentanaLogin(QtWidgets.QMainWindow):
                 #if not self.ventana_mostrador:
                     #self.ventana_mostrador = VentanaMostrador()
                 #self.ventana_mostrador.show()
+                print("mostrador")
                 
         
             elif empleado.rol == 'zona_juegos':
