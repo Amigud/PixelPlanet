@@ -103,23 +103,6 @@ border-radius:5px;</string>
       <string/>
      </property>
     </widget>
-    <widget class="QLineEdit" name="fechaEdit">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>150</y>
-       <width>301</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(255, 255, 255);
-border-radius:5px;</string>
-     </property>
-     <property name="placeholderText">
-      <string/>
-     </property>
-    </widget>
     <widget class="QLineEdit" name="videojuegoEdit">
      <property name="geometry">
       <rect>
@@ -228,6 +211,19 @@ border-radius:5px;</string>
      </property>
      <property name="placeholderText">
       <string/>
+     </property>
+    </widget>
+    <widget class="QDateEdit" name="fechaEdit">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>150</y>
+       <width>110</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);</string>
      </property>
     </widget>
    </widget>
