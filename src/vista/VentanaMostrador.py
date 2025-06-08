@@ -14,12 +14,18 @@ class VentanaMostrador(QtWidgets.QMainWindow):
         
         self.socioBoton.clicked.connect(self.abrir_socio)
         self.productoBoton.clicked.connect(self.abrir_producto)
+        self.resenaBoton.clicked.connect(self.abrir_resena)
 
     
     def abrir_socio(self):
         self.hide()
         self.ventana_socio = VentanaSocio(self.empleado, self)
         self.ventana_socio.show()
+    
+    def abrir_resena(self):
+        self.hide()
+        self.ventana_resena = VentanaResena(self.empleado, self)
+        self.ventana_resena.show()
 
     def abrir_producto(self):
         self.hide()
