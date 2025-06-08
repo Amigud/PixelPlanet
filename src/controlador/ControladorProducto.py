@@ -1,8 +1,8 @@
-from src.modelo.dao.ProductoDAO import ProductoDAO
+from src.modelo.dao.ProductoDAOJDBC import ProductoDAOJDBC
 
 class ControladorProducto:
     def __init__(self):
-        self.dao = ProductoDAO()
+        self.dao = ProductoDAOJDBC()
 
     def registrar_producto(self, nombre, descripcion, precio, generos):
         try:
