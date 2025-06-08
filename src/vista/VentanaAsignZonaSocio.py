@@ -11,16 +11,16 @@ class VentanaAsignZonaSocio(QtWidgets.QMainWindow):
         self.parent = parent
         self.controlador = ControladorZonaJuego()
         
-        # Configurar ComboBox con horarios
+        
         self.cargar_horarios()
         
-        # Conectar botones
+        
         self.aceptarBoton.clicked.connect(self.asignar_zona)
         self.regresarBoton.clicked.connect(self.regresar)
         self.zonaEdit.textChanged.connect(self.actualizar_horarios)
 
     def cargar_horarios(self, zona_id=None):
-        self.horarioCombo.clear()
+        self.horarioBox.clear()
         if zona_id:
             horarios_disponibles = self.controlador.obtener_horarios_disponibles(zona_id)
             if not horarios_disponibles:
@@ -28,7 +28,7 @@ class VentanaAsignZonaSocio(QtWidgets.QMainWindow):
         else:
             horarios_disponibles = [f"{h}:00" for h in range(16, 22)]
         
-        self.horarioCombo.addItems(horarios_disponibles)
+        self.horarioBox.addItems(horarios_disponibles)
 
     def actualizar_horarios(self):
         zona_id = self.zonaEdit.text().strip()
@@ -41,7 +41,7 @@ class VentanaAsignZonaSocio(QtWidgets.QMainWindow):
     def asignar_zona(self):
         zona_id = self.zonaEdit.text().strip()
         email = self.emailEdit.text().strip()
-        horario = self.horarioCombo.currentText()
+        horario = self.horarioBox.currentText()
         trae_juego = self.traejuegoBox.isChecked()
         
         if not all([zona_id, email, horario]):

@@ -104,7 +104,7 @@ border: 5px solid black;</string>
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>360</y>
+      <y>330</y>
       <width>181</width>
       <height>71</height>
      </rect>
@@ -125,7 +125,7 @@ border: 5px solid black;</string>
     <property name="geometry">
      <rect>
       <x>360</x>
-      <y>370</y>
+      <y>340</y>
       <width>51</width>
       <height>51</height>
      </rect>
@@ -147,7 +147,7 @@ border: 5px solid black;</string>
     <property name="geometry">
      <rect>
       <x>270</x>
-      <y>340</y>
+      <y>310</y>
       <width>101</width>
       <height>101</height>
      </rect>
@@ -165,6 +165,28 @@ border: 5px solid black;</string>
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QPushButton" name="btn_regresar">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>440</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Login&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 11pt &quot;MS Shell Dlg 2&quot;;
+background-color: rgb(255, 255, 165);
+border-radius:10px;
+border: 1px solid black;</string>
+    </property>
+    <property name="text">
+     <string>Regresar</string>
+    </property>
+   </widget>
    <zorder>label</zorder>
    <zorder>label_6</zorder>
    <zorder>asignarBoton</zorder>
@@ -172,6 +194,7 @@ border: 5px solid black;</string>
    <zorder>eliminarBoton</zorder>
    <zorder>label_5</zorder>
    <zorder>label_4</zorder>
+   <zorder>btn_regresar</zorder>
   </widget>
  </widget>
  <resources/>

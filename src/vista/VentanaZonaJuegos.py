@@ -1,6 +1,7 @@
 from PyQt5 import uic, QtWidgets
 from src.vista.VentanaSpeedrun import VentanaSpeedrun
 from src.vista.VentanaTorneo import VentanaTorneo
+from src.vista.VentanaAsignarZona import VentanaAsignarZona
 
 
 class VentanaZonaJuegos(QtWidgets.QMainWindow):
@@ -18,6 +19,7 @@ class VentanaZonaJuegos(QtWidgets.QMainWindow):
         
         self.speedrunBoton.clicked.connect(self.abrir_speedrun)
         self.torneoBoton.clicked.connect(self.abrir_torneo)
+        self.zonajuegoBoton.clicked.connect(self.abrir_asignar_zona)
 
     def abrir_speedrun(self):
         self.hide()
@@ -30,5 +32,11 @@ class VentanaZonaJuegos(QtWidgets.QMainWindow):
         if not self.ventana_torneo:
             self.ventana_torneo = VentanaTorneo(self.empleado, self)
         self.ventana_torneo.show()
+        
+    def abrir_asignar_zona(self):
+        self.hide()
+        if not self.ventana_asignar_zona:
+            self.ventana_asignar_zona = VentanaAsignarZona(self.empleado)
+        self.ventana_asignar_zona.show()
         
         
