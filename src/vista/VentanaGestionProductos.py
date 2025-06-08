@@ -18,6 +18,7 @@ class VentanaGestionProductos(QtWidgets.QMainWindow):
         self.elimProdBoton.clicked.connect(self.abrir_eliminar_producto)
         self.consProdBoton.clicked.connect(self.abrir_consultar_producto)
         self.devolBoton.clicked.connect(self.abrir_devolucion)
+        self.regresarBoton.clicked.connect(self.regresar)
 
     def abrir_agregar_producto(self):
         # self.hide()
@@ -42,3 +43,8 @@ class VentanaGestionProductos(QtWidgets.QMainWindow):
         # self.ventana_devolucion = VentanaDevolucion(self.empleado, self)
         # self.ventana_devolucion.show()
         print("Abrir: Devolución de Producto")
+    
+    def regresar(self):
+        if self.parent:
+            self.parent.show()
+        self.close()
