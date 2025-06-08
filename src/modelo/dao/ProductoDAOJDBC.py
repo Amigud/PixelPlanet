@@ -1,5 +1,5 @@
 from src.modelo.conexion.Conexion import Conexion
-from src.modelo.dao.ProductoDAO_a import ProductoDAO
+from modelo.dao.ProductoDAO import ProductoDAO
 from src.modelo.vo.ProductoVO_a import ProductoVO
 
 class ProductoDAOJDBC(ProductoDAO, Conexion):
@@ -52,7 +52,7 @@ class ProductoDAOJDBC(ProductoDAO, Conexion):
                 return False
 
             cantidad_actual = row[0]
-            nueva_cantidad = max(0, cantidad_actual - cantidad) 
+            nueva_cantidad = max(0, cantidad_actual + cantidad) 
 
             # Actualizar cantidad
             cursor.execute(
