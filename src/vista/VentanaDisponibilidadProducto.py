@@ -6,12 +6,30 @@ class VentanaDisponibilidadProducto(QtWidgets.QMainWindow):
         super().__init__()
         uic.loadUi("src/Ui/VentanaDisponibilidadProducto.ui", self)
         self.controlador = ControladorProducto()
-        self.botonConsultar.clicked.connect(self.mostrar_productos)
 
-    def mostrar_productos(self):
-        productos = self.controlador.obtener_productos()
-        self.tabla.setRowCount(0)
-        for i, prod in enumerate(productos):
-            self.tabla.insertRow(i)
-            for j, dato in enumerate(prod):
-                self.tabla.setItem(i, j, QtWidgets.QTableWidgetItem(str(dato)))
+        # Conectar botones
+        self.BuscarProducto.clicked.connect(self.buscar_producto)
+        self.RegresarProducto.clicked.connect(self.close)
+
+    def buscar_producto(self):
+        nombre = self.InsNombreProducto.text().strip()
+
+        if not nombre:
+            QtWidgets.QMessageBox.warning(self, "Campo vacío", "Por favor, introduce un nombre de producto.")
+            return
+
+        cantidad = self.controlador.obtener_cantidad_producto(nombre)
+
+        if cantidad is not None:
+            QtWidgets.QMessageBox.information(
+                self,
+                "Cantidad disponible",
+                f"Hay {cantidad} unidades disponibles del producto '{nombre}'."
+            )
+        else:
+            QtWidgets.QMessageBox.warning(
+                self,
+                "Producto no encontrado",
+                f"No se encontró ningún producto con el nombre '{nombre}'."
+            )
+
