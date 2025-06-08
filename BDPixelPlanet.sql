@@ -35,7 +35,8 @@ CREATE TABLE productos (
     ProductoID INT AUTO_INCREMENT PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
     Descripcion TEXT,
-    Precio DECIMAL(10,2) NOT NULL
+    Precio DECIMAL(10,2) NOT NULL,
+    Cantidad INT NOT NULL
 );
 
 CREATE TABLE genero_prod (
@@ -115,3 +116,12 @@ INSERT INTO emp_mostrador (EmpleadoMostrID, NumVentas) VALUES
 
 INSERT INTO emp_zona_juegos (EmpleadoZDJID, NumTorneos, NumSpeedruns) VALUES 
 (2, 0, 0); 
+
+INSERT INTO socios (NombreSocio, Apellidos,FechaNacim, Email, Telefono) VALUES 
+('Pepe', 'Miguel', '1990-05-15', 'pepe@gmail.com', '123456789'),
+('Maria', 'Rodriguez', '2001-04-21', 'maria@gmail.com', '679453762');
+
+INSERT INTO zonajuego (Capacidad) VALUES 
+(2),(4),(4),(3),(5),(3);
+
+ALTER TABLE productos ADD COLUMN Cantidad INT NOT NULL;
