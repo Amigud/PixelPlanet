@@ -131,3 +131,12 @@ class ProductoDAOJDBC(ProductoDAO, Conexion):
             if cursor:
                 cursor.close()
             self.closeConnection()
+    
+    def sumar_cantidad(self, producto_id, cantidad):
+        cursor = self.getCursor()
+        cursor.execute(
+            "UPDATE productos SET Cantidad = Cantidad + ? WHERE ProductoID = ?",
+            (cantidad, producto_id)
+        )
+        return cursor.rowcount > 0
+
