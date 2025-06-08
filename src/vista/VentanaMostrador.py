@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets, uic
 from src.vista.VentanaSocio import VentanaSocio
+from src.vista.VentanaGestionProductos import VentanaGestionProductos
 
 
 class VentanaMostrador(QtWidgets.QMainWindow):
@@ -12,12 +13,18 @@ class VentanaMostrador(QtWidgets.QMainWindow):
 
         
         self.socioBoton.clicked.connect(self.abrir_socio)
+        self.productoBoton.clicked.connect(self.abrir_producto)
 
     
     def abrir_socio(self):
         self.hide()
         self.ventana_socio = VentanaSocio(self.empleado, self)
         self.ventana_socio.show()
+
+    def abrir_producto(self):
+        self.hide()
+        self.ventana_producto = VentanaGestionProductos(self.empleado, self)
+        self.ventana_producto.show()
 
         
 
