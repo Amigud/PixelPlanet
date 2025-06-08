@@ -30,3 +30,7 @@ class ControladorProducto:
 
     def obtener_info_producto(self, nombre):
         return self.dao.obtener_id_y_cantidad_por_nombre(nombre)
+    
+    def restar_stock(self, producto_id, cantidad):
+        return self.dao.restar_cantidad(producto_id, cantidad)
+

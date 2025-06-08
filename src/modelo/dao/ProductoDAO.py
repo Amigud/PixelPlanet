@@ -46,4 +46,27 @@ class ProductoDAO:
         cursor = self.db.getCursor()
         cursor.execute("SELECT ProductoID, Cantidad FROM productos WHERE Nombre = ?", (nombre,))
         return cursor.fetchone()  # Devuelve (ID, Cantidad) o None
+    
+    def restar_cantidad(self, producto_id, cantidad):
+        cursor = self.db.getCursor()
+
+        # Verificar que haya suficiente cantidad
+        cursor.execute("SELECT Cantidad FROM productos WHERE ProductoID = ?", (producto_id,))
+        resultado = cursor.fetchone()
+
+        if not resultado:
+            return False
+
+        cantidad_actual = resultado[0]
+        if cantidad > cantidad_actual:
+            return False
+
+        # Ejecutar la actualización
+        cursor.execute(
+            "UPDATE productos SET Cantidad = Cantidad - ? WHERE ProductoID = ?",
+            (cantidad, producto_id)
+        )
+        return cursor.rowcount > 0
+
+
 
