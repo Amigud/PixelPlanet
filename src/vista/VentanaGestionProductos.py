@@ -2,7 +2,7 @@ from PyQt5 import QtWidgets, uic
 # Aún no tienes estas ventanas, pero puedes crearlas después
 # from src.vista.VentanaAgregarProducto import VentanaAgregarProducto
 # from src.vista.VentanaEliminarProducto import VentanaEliminarProducto
-# from src.vista.VentanaConsultarProducto import VentanaConsultarProducto
+from src.vista.VentanaDisponibilidadProducto import VentanaDisponibilidadProducto
 # from src.vista.VentanaDevolucion import VentanaDevolucion
 
 class VentanaGestionProductos(QtWidgets.QMainWindow):
@@ -33,9 +33,9 @@ class VentanaGestionProductos(QtWidgets.QMainWindow):
         print("Abrir: Eliminar Producto")
 
     def abrir_consultar_producto(self):
-        # self.hide()
-        # self.ventana_consultar = VentanaConsultarProducto(self.empleado, self)
-        # self.ventana_consultar.show()
+        self.hide()
+        self.ventana_consultar = VentanaDisponibilidadProducto(self.empleado, self)
+        self.ventana_consultar.show()
         print("Abrir: Consultar Producto")
 
     def abrir_devolucion(self):

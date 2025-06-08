@@ -2,14 +2,16 @@ from PyQt5 import uic, QtWidgets
 from src.controlador.ControladorProducto import ControladorProducto
 
 class VentanaDisponibilidadProducto(QtWidgets.QMainWindow):
-    def __init__(self):
-        super().__init__()
-        uic.loadUi("src/Ui/VentanaDisponibilidadProducto.ui", self)
+    def __init__(self, empleado=None, parent=None):
+        super().__init__(parent)
+        uic.loadUi("src/Ui/DisponibilidadProductos.ui", self)  # Asegúrate que el archivo se llame exactamente así
         self.controlador = ControladorProducto()
+        self.empleado = empleado
+        self.parent = parent
 
         # Conectar botones
         self.BuscarProducto.clicked.connect(self.buscar_producto)
-        self.RegresarProducto.clicked.connect(self.close)
+        self.RegresarProducto.clicked.connect(self.regresar)
 
     def buscar_producto(self):
         nombre = self.InsNombreProducto.text().strip()
@@ -18,13 +20,14 @@ class VentanaDisponibilidadProducto(QtWidgets.QMainWindow):
             QtWidgets.QMessageBox.warning(self, "Campo vacío", "Por favor, introduce un nombre de producto.")
             return
 
-        cantidad = self.controlador.obtener_cantidad_producto(nombre)
+        info = self.controlador.obtener_info_producto(nombre)
 
-        if cantidad is not None:
+        if info:
+            producto_id, cantidad = info
             QtWidgets.QMessageBox.information(
                 self,
                 "Cantidad disponible",
-                f"Hay {cantidad} unidades disponibles del producto '{nombre}'."
+                f"Producto: '{nombre}'\nID: {producto_id}\nCantidad disponible: {cantidad}"
             )
         else:
             QtWidgets.QMessageBox.warning(
@@ -32,4 +35,11 @@ class VentanaDisponibilidadProducto(QtWidgets.QMainWindow):
                 "Producto no encontrado",
                 f"No se encontró ningún producto con el nombre '{nombre}'."
             )
+
+    def regresar(self):
+        if self.parent:
+            self.parent.show()
+        self.close()
+
+
 

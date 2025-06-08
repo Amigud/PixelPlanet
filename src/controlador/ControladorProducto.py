@@ -24,3 +24,9 @@ class ControladorProducto:
             return self.dao.actualizar(pid, nombre, descripcion, float(precio))
         except:
             return False
+
+    def obtener_cantidad_producto(self, nombre):
+        return self.dao.obtener_cantidad_por_nombre(nombre)
+
+    def obtener_info_producto(self, nombre):
+        return self.dao.obtener_id_y_cantidad_por_nombre(nombre)

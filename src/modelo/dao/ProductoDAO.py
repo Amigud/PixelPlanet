@@ -35,3 +35,15 @@ class ProductoDAO:
                        (nombre, descripcion, precio, pid))
         self.db.conexion.commit()
         return cursor.rowcount > 0
+
+    def obtener_cantidad_por_nombre(self, nombre):
+        cursor = self.db.getCursor()
+        cursor.execute("SELECT Cantidad FROM productos WHERE Nombre = ?", (nombre,))
+        resultado = cursor.fetchone()
+        return resultado[0] if resultado else None
+
+    def obtener_id_y_cantidad_por_nombre(self, nombre):
+        cursor = self.db.getCursor()
+        cursor.execute("SELECT ProductoID, Cantidad FROM productos WHERE Nombre = ?", (nombre,))
+        return cursor.fetchone()  # Devuelve (ID, Cantidad) o None
+
