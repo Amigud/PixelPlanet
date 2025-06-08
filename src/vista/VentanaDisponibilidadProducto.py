@@ -9,7 +9,7 @@ class VentanaDisponibilidadProducto(QtWidgets.QMainWindow):
         self.empleado = empleado
         self.parent = parent
 
-        # Conectar botones
+        
         self.BuscarProducto.clicked.connect(self.buscar_producto)
         self.RegresarProducto.clicked.connect(self.regresar)
 

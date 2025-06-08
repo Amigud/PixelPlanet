@@ -39,9 +39,9 @@ class VentanaGestionProductos(QtWidgets.QMainWindow):
         print("Abrir: Consultar Producto")
 
     def abrir_devolucion(self):
-        # self.hide()
-        # self.ventana_devolucion = VentanaDevolucion(self.empleado, self)
-        # self.ventana_devolucion.show()
+        self.hide()
+        self.ventana_devolucion = VentanaDevolucion(self.empleado, self)
+        self.ventana_devolucion.show()
         print("Abrir: Devolución de Producto")
     
     def regresar(self):
