@@ -1,6 +1,7 @@
 from PyQt5 import QtWidgets, uic
 from src.vista.VentanaSocio import VentanaSocio
 from src.vista.VentanaGestionProductos import VentanaGestionProductos
+from src.vista.VentanaResena import VentanaResena
 
 
 class VentanaMostrador(QtWidgets.QMainWindow):

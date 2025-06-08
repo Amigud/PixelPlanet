@@ -4,8 +4,8 @@ from src.modelo.vo.ResenaVO import ResenaVO
 
 class ResenaDAOJDBC(ResenaDAO, Conexion):
     SQL_INSERT = """
-        INSERT INTO resenas (Estrellas, Comentario, Fecha, CodProducto)
-        VALUES (?, ?, CURDATE(), ?)
+    INSERT INTO resenas (Estrellas, Comentario, Fecha, CodProducto, CodEmpleado)
+    VALUES (?, ?, CURDATE(), ?, ?)
     """
 
     def insertar_resena(self, resena: ResenaVO) -> bool:
@@ -14,7 +14,8 @@ class ResenaDAOJDBC(ResenaDAO, Conexion):
             cursor.execute(self.SQL_INSERT, (
                 resena.estrellas,
                 resena.comentario,
-                resena.cod_producto
+                resena.cod_producto,
+                resena.cod_empleado
             ))
             return cursor.rowcount > 0
         except Exception as e:
