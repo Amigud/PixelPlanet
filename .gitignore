@@ -1,2 +1,3 @@
 __pycache__
 src/vista/__pycache__/VentanaZonaJuegos.cpython-312.pyc
+*.pyc
