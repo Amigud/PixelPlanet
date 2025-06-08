@@ -3,7 +3,7 @@ from src.modelo.dao.SocioDAO import SocioDAO
 from src.modelo.vo.SocioVO import SocioVO
 
 class SocioDAOJDBC(SocioDAO, Conexion):
-    SQL_BUSCAR_EMAIL = "SELECT ClienteID, NombreSocio, Email FROM socios WHERE Email = %s"
+    SQL_BUSCAR_EMAIL = "SELECT ClienteID, NombreSocio, Email FROM socios WHERE Email = ?"
 
     def buscar_por_email(self, email: str) -> SocioVO | None:
         cursor = self.getCursor()

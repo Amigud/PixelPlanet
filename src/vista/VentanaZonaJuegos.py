@@ -36,7 +36,7 @@ class VentanaZonaJuegos(QtWidgets.QMainWindow):
     def abrir_asignar_zona(self):
         self.hide()
         if not self.ventana_asignar_zona:
-            self.ventana_asignar_zona = VentanaAsignarZona(self.empleado)
+            self.ventana_asignar_zona = VentanaAsignarZona(self.empleado, self)
         self.ventana_asignar_zona.show()
         
         
