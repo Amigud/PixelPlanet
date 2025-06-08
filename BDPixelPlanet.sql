@@ -125,3 +125,7 @@ INSERT INTO zonajuego (Capacidad) VALUES
 (2),(4),(4),(3),(5),(3);
 
 ALTER TABLE productos ADD COLUMN Cantidad INT NOT NULL;
+
+INSERT INTO productos (Nombre, Precio, Cantidad) VALUES 
+('Mario Kart', 50.99, 20),
+('Overwatched', 4.99, 15);
