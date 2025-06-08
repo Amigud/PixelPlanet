@@ -36,4 +36,4 @@ class ControladorZonaJuego:
         return False, "No se encontró la asignación o ocurrió un error"
 
     def obtener_horarios_disponibles(self, zona_id: int) -> list:
-        return self.asignacion_dao.obtenir_horarios_disponibles(zona_id)
+        return self.asignacion_dao.obtener_horarios_disponibles(zona_id)

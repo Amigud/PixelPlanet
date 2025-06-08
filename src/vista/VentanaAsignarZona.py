@@ -10,7 +10,7 @@ class VentanaAsignarZona(QtWidgets.QMainWindow):
         self.empleado = empleado
         self.parent = parent
         
-        # Conectar botones
+        
         self.asignarBoton.clicked.connect(self.abrir_asignar)
         self.eliminarBoton.clicked.connect(self.abrir_eliminar)
         self.btn_regresar.clicked.connect(self.regresar)
@@ -26,6 +26,8 @@ class VentanaAsignarZona(QtWidgets.QMainWindow):
         self.ventana_eliminar.show()
 
     def regresar(self):
+        
         if self.parent:
             self.parent.show()
         self.close()
+        
