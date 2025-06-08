@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets, uic
-# Aún no tienes estas ventanas, pero puedes crearlas después
-# from src.vista.VentanaAgregarProducto import VentanaAgregarProducto
+
+from src.vista.VentanaAgregarProducto import VentanaAgregarProducto
 from src.vista.VentanaEliminarProducto import VentanaEliminarProducto
 from src.vista.VentanaDisponibilidadProducto import VentanaDisponibilidadProducto
 from src.vista.VentanaDevolucion import VentanaDevolucion
@@ -21,9 +21,9 @@ class VentanaGestionProductos(QtWidgets.QMainWindow):
         self.regresarBoton.clicked.connect(self.regresar)
 
     def abrir_agregar_producto(self):
-        # self.hide()
-        # self.ventana_agregar = VentanaAgregarProducto(self.empleado, self)
-        # self.ventana_agregar.show()
+        self.hide()
+        self.ventana_agregar = VentanaAgregarProducto(self.empleado, self)
+        self.ventana_agregar.show()
         print("Abrir: Añadir Producto")
 
     def abrir_eliminar_producto(self):

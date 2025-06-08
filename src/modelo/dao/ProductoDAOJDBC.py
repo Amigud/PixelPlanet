@@ -1,6 +1,6 @@
 from src.modelo.conexion.Conexion import Conexion
-from modelo.dao.ProductoDAO import ProductoDAO
-from src.modelo.vo.ProductoVO_a import ProductoVO
+from src.modelo.dao.ProductoDAO import ProductoDAO
+from src.modelo.vo.ProductoVO import ProductoVO
 
 class ProductoDAOJDBC(ProductoDAO, Conexion):
     SQL_SELECT = "SELECT ProductoID, Nombre, Descripcion, Precio, Cantidad FROM productos"
@@ -44,7 +44,6 @@ class ProductoDAOJDBC(ProductoDAO, Conexion):
     def devolver_producto(self, nombre: str, cantidad: int) -> bool:
         cursor = self.getCursor()
         try:
-            # Buscar cantidad actual
             cursor.execute("SELECT Cantidad FROM productos WHERE Nombre = ?", (nombre,))
             row = cursor.fetchone()
             if not row:
@@ -52,9 +51,8 @@ class ProductoDAOJDBC(ProductoDAO, Conexion):
                 return False
 
             cantidad_actual = row[0]
-            nueva_cantidad = max(0, cantidad_actual + cantidad) 
+            nueva_cantidad = max(0, cantidad_actual + cantidad)
 
-            # Actualizar cantidad
             cursor.execute(
                 "UPDATE productos SET Cantidad = ? WHERE Nombre = ?",
                 (nueva_cantidad, nombre)
@@ -62,6 +60,72 @@ class ProductoDAOJDBC(ProductoDAO, Conexion):
             return cursor.rowcount > 0
         except Exception as e:
             print(f"Error al devolver producto: {e}")
+            return False
+        finally:
+            if cursor:
+                cursor.close()
+            self.closeConnection()
+
+    def obtener_id_y_cantidad_por_nombre(self, nombre: str):
+        cursor = self.getCursor()
+        try:
+            cursor.execute("SELECT ProductoID, Cantidad FROM productos WHERE Nombre = ?", (nombre,))
+            return cursor.fetchone()
+        except Exception as e:
+            print(f"Error al obtener ID y cantidad: {e}")
+            return None
+        finally:
+            if cursor:
+                cursor.close()
+            self.closeConnection()
+
+    def obtener_cantidad_por_nombre(self, nombre: str):
+        cursor = self.getCursor()
+        try:
+            cursor.execute("SELECT Cantidad FROM productos WHERE Nombre = ?", (nombre,))
+            resultado = cursor.fetchone()
+            return resultado[0] if resultado else None
+        except Exception as e:
+            print(f"Error al obtener cantidad: {e}")
+            return None
+        finally:
+            if cursor:
+                cursor.close()
+            self.closeConnection()
+
+    def buscar_por_id(self, producto_id: int):
+        cursor = self.getCursor()
+        try:
+            cursor.execute("SELECT * FROM productos WHERE ProductoID = ?", (producto_id,))
+            return cursor.fetchone()
+        except Exception as e:
+            print(f"Error al buscar producto por ID: {e}")
+            return None
+        finally:
+            if cursor:
+                cursor.close()
+            self.closeConnection()
+
+    def restar_cantidad(self, producto_id: int, cantidad: int) -> bool:
+        cursor = self.getCursor()
+        try:
+            cursor.execute("SELECT Cantidad FROM productos WHERE ProductoID = ?", (producto_id,))
+            resultado = cursor.fetchone()
+
+            if not resultado:
+                return False
+
+            cantidad_actual = resultado[0]
+            if cantidad > cantidad_actual:
+                return False
+
+            cursor.execute(
+                "UPDATE productos SET Cantidad = Cantidad - ? WHERE ProductoID = ?",
+                (cantidad, producto_id)
+            )
+            return cursor.rowcount > 0
+        except Exception as e:
+            print(f"Error al restar cantidad: {e}")
             return False
         finally:
             if cursor:

@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtWidgets import QMessageBox
-from modelo.dao.ProductoDAOJDBC import ProductoDAOJDBC
+from src.modelo.dao.ProductoDAOJDBC import ProductoDAOJDBC
 
 class VentanaDevolucion(QtWidgets.QMainWindow):
     def __init__(self, empleado, parent=None):
