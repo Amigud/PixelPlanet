@@ -33,4 +33,8 @@ class ControladorProducto:
     
     def restar_stock(self, producto_id, cantidad):
         return self.dao.restar_cantidad(producto_id, cantidad)
+    
+    def aumentar_stock(self, producto_id, cantidad):
+        return self.dao.sumar_cantidad(producto_id, cantidad)
+
 

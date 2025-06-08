@@ -4,11 +4,13 @@ from PyQt5 import QtWidgets, uic
 from src.vista.VentanaEliminarProducto import VentanaEliminarProducto
 from src.vista.VentanaDisponibilidadProducto import VentanaDisponibilidadProducto
 from src.vista.VentanaDevolucion import VentanaDevolucion
+from src.vista.VentanaPedidosProveedores import VentanaPedidosProveedores
 
 class VentanaGestionProductos(QtWidgets.QMainWindow):
     def __init__(self, empleado, parent=None):
         super().__init__(parent)
         uic.loadUi("./src/Ui/Gestproductos.ui", self)
+
 
         self.empleado = empleado
         self.parent = parent
@@ -19,6 +21,7 @@ class VentanaGestionProductos(QtWidgets.QMainWindow):
         self.consProdBoton.clicked.connect(self.abrir_consultar_producto)
         self.devolBoton.clicked.connect(self.abrir_devolucion)
         self.regresarBoton.clicked.connect(self.regresar)
+        self.BotonProveedores.clicked.connect(self.abrir_gestion_pedidos)
 
     def abrir_agregar_producto(self):
         # self.hide()
@@ -43,6 +46,11 @@ class VentanaGestionProductos(QtWidgets.QMainWindow):
         self.ventana_devolucion = VentanaDevolucion(self.empleado, self)
         self.ventana_devolucion.show()
         print("Abrir: Devolución de Producto")
+        
+    def abrir_gestion_pedidos(self):
+        self.hide()
+        self.ventana_pedidos = VentanaPedidosProveedores(self.empleado, self)
+        self.ventana_pedidos.show()
     
     def regresar(self):
         if self.parent:
