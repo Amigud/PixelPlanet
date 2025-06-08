@@ -2,7 +2,7 @@ from PyQt5 import uic, QtWidgets
 import sys
 from src.controlador.ControladorLogin import ControladorLogin
 from src.vista.VentanaZonaJuegos import VentanaZonaJuegos
-from src.vista.VentanaMostrador import VentanaMostrador
+#from src.vista.VentanaMostrador import VentanaMostrador
 
 class VentanaLogin(QtWidgets.QMainWindow):
     def __init__(self):
@@ -22,9 +22,9 @@ class VentanaLogin(QtWidgets.QMainWindow):
             self.hide()
 
             if empleado.rol == 'mostrador':
-                if not self.ventana_mostrador:
-                    self.ventana_mostrador = VentanaMostrador()
-                self.ventana_mostrador.show()
+                #if not self.ventana_mostrador:
+                    #self.ventana_mostrador = VentanaMostrador()
+                #self.ventana_mostrador.show()
                 print("mostrador")
                 
         
