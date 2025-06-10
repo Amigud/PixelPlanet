@@ -1,7 +1,8 @@
 from src.modelo.conexion.Conexion import Conexion
 from src.modelo.vo.AsignacionZonaVO import AsignacionZonaVO
+from src.modelo.dao.AsignacionZonaDAO import AsignacionZonaDAO
 
-class AsignacionZonaDAOJDBC(Conexion):
+class AsignacionZonaDAOJDBC(AsignacionZonaDAO, Conexion):
     def asignar_zona(self, asignacion: AsignacionZonaVO) -> bool:
         cursor = None
         try:

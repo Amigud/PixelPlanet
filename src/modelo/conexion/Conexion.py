@@ -1,7 +1,15 @@
 import jaydebeapi
 
 class Conexion:
-    def __init__(self, host='localhost', database='pixelplanet', user='root', password='changeme'):
+    _instancia = None  
+
+    def __new__(cls, *args, **kwargs):
+        if cls._instancia is None:
+            cls._instancia = super().__new__(cls)
+            cls._instancia._init_conexion(*args, **kwargs)
+        return cls._instancia
+
+    def _init_conexion(self, host='localhost', database='pixelplanet', user='root', password='changeme'):
         self._host = host
         self._database = database
         self._user = user
@@ -23,8 +31,6 @@ class Conexion:
             print("Error creando conexión:", e)
             return None
 
-    """Un cursor es una estructura de control que permite recorrer los resultados de una 
-    consulta SQL y manipular fila por fila los datos recuperados desde una base de datos."""
     def getCursor(self):
         if self.conexion is None:
             self.createConnection()
@@ -35,8 +41,10 @@ class Conexion:
             if self.conexion:
                 self.conexion.close()
                 self.conexion = None
+                Conexion._instancia = None  
         except Exception as e:
             print("Error cerrando conexión:", e)
+
 
 if __name__ == "__main__":
     c = Conexion()
@@ -46,4 +54,4 @@ if __name__ == "__main__":
         for tabla in cursor.fetchall():
             print(tabla)
         c.closeConnection()
-
+    

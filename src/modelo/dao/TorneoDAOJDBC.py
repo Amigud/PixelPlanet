@@ -1,7 +1,8 @@
 from src.modelo.conexion.Conexion import Conexion
 from src.modelo.vo.TorneoVO import TorneoVO
+from src.modelo.dao.TorneoDAO import TorneoDAO
 
-class TorneoDAOJDBC(Conexion):
+class TorneoDAOJDBC(TorneoDAO, Conexion):
     def crear_torneo(self, torneo: TorneoVO) -> bool:
         cursor = None
         try:
@@ -11,7 +12,7 @@ class TorneoDAOJDBC(Conexion):
             
             cursor = self.conexion.cursor()
             
-            # 1. Insertar el torneo
+            
             cursor.execute(
                 "INSERT INTO torneos (NombreTorneo, Juego, Fecha, CodEmpleado) VALUES (?, ?, ?, ?)",
                 (torneo.nombre, torneo.juego, torneo.fecha, torneo.empleado_id)

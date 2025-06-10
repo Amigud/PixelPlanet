@@ -1,7 +1,8 @@
 from src.modelo.conexion.Conexion import Conexion
 from src.modelo.vo.SpeedrunVO import SpeedrunVO
+from src.modelo.dao.SpeedrunDAO import SpeedrunDAO
 
-class SpeedrunDAOJDBC(Conexion):
+class SpeedrunDAOJDBC(SpeedrunDAO, Conexion):
     def registrar_speedrun(self, speedrun: SpeedrunVO) -> bool:
         cursor = None
         try:

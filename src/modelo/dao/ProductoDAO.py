@@ -21,3 +21,6 @@ class ProductoDAO:
 
     def restar_cantidad(self, producto_id: int, cantidad: int) -> bool:
         raise NotImplementedError()
+    
+    def sumar_cantidad(self, producto_id: int, cantidad: int) -> bool:
+        raise NotImplementedError()
