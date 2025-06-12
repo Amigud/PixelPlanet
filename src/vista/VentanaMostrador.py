@@ -12,7 +12,7 @@ class VentanaMostrador(QtWidgets.QMainWindow):
         self.empleado = empleado
         self.parent = parent
 
-        
+        self.setWindowTitle(f"Menú Empleado del Mostrador")
         self.socioBoton.clicked.connect(self.abrir_socio)
         self.productoBoton.clicked.connect(self.abrir_producto)
         self.resenaBoton.clicked.connect(self.abrir_resena)

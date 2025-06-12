@@ -11,6 +11,7 @@ class VentanaDevolucion(QtWidgets.QMainWindow):
         self.parent = parent
         self.dao = ProductoDAOJDBC()
 
+        self.setWindowTitle(f"Realizar Devolución")
         self.aceptarBoton.clicked.connect(self.procesar_devolucion)
         self.regresarBoton.clicked.connect(self.regresar)
 

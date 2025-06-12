@@ -6,6 +6,8 @@ class VentanaRegistrarProducto(QtWidgets.QMainWindow):
         super().__init__()
         uic.loadUi("src/Ui/VentanaRegistrarProducto.ui", self)
         self.controlador = ControladorProducto()
+
+        self.setWindowTitle(f"Registrar un producto")
         self.botonRegistrar.clicked.connect(self.registrar)
 
     def registrar(self):

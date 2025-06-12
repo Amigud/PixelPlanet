@@ -15,7 +15,7 @@ class VentanaGestionProductos(QtWidgets.QMainWindow):
         self.empleado = empleado
         self.parent = parent
 
-        # Conectar botones
+        self.setWindowTitle(f"Gestión de Productos")
         self.anadirProdBoton.clicked.connect(self.abrir_agregar_producto)
         self.elimProdBoton.clicked.connect(self.abrir_eliminar_producto)
         self.consProdBoton.clicked.connect(self.abrir_consultar_producto)

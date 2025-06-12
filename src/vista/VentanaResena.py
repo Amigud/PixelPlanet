@@ -12,6 +12,7 @@ class VentanaResena(QtWidgets.QMainWindow):
         self.parent = parent
         self.dao = ResenaDAOJDBC()
 
+        self.setWindowTitle(f"Insertar una Reseña")
         self.aceptarBoton.clicked.connect(self.insertar_resena)
         self.regresarBoton.clicked.connect(self.regresar)
 

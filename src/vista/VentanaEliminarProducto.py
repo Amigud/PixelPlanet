@@ -9,6 +9,7 @@ class VentanaEliminarProducto(QtWidgets.QMainWindow):
         self.empleado = empleado
         self.parent = parent
 
+        self.setWindowTitle(f"Eliminar producto")
         self.BuscarProductoElim.clicked.connect(self.buscar_y_confirmar)
         self.RegresarProductoElim.clicked.connect(self.regresar)
 

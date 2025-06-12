@@ -12,7 +12,7 @@ class VentanaAgregarProducto(QtWidgets.QMainWindow):
         self.parent = parent
         self.dao = ProductoDAOJDBC()
 
-        # Conectar botones
+        self.setWindowTitle(f"Agregar producto")
         self.aceptarBoton.clicked.connect(self.registrar_producto)
         self.regresarBoton.clicked.connect(self.regresar)
 

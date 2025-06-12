@@ -16,7 +16,7 @@ class VentanaZonaJuegos(QtWidgets.QMainWindow):
         self.ventana_torneo = None
         self.ventana_asignar_zona = None
         
-        
+        self.setWindowTitle(f"Menu Zona de Juegos")
         self.speedrunBoton.clicked.connect(self.abrir_speedrun)
         self.torneoBoton.clicked.connect(self.abrir_torneo)
         self.zonajuegoBoton.clicked.connect(self.abrir_asignar_zona)

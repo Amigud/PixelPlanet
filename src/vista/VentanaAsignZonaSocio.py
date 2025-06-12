@@ -14,7 +14,7 @@ class VentanaAsignZonaSocio(QtWidgets.QMainWindow):
         
         self.cargar_horarios()
         
-        
+        self.setWindowTitle(f"Asignar Zona de Juego a Socio")
         self.aceptarBoton.clicked.connect(self.asignar_zona)
         self.regresarBoton.clicked.connect(self.regresar)
         self.zonaEdit.textChanged.connect(self.actualizar_horarios)

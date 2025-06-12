@@ -6,6 +6,8 @@ class VentanaActualizarProducto(QtWidgets.QMainWindow):
         super().__init__()
         uic.loadUi("src/Ui/VentanaActualizarProducto.ui", self)
         self.controlador = ControladorProducto()
+
+        self.setWindowTitle(f"Actualizar producto")
         self.botonBuscar.clicked.connect(self.buscar)
         self.botonActualizar.clicked.connect(self.actualizar)
 

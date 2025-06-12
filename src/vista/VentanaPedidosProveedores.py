@@ -9,7 +9,7 @@ class VentanaPedidosProveedores(QtWidgets.QMainWindow):
         self.empleado = empleado
         self.parent = parent
 
-        # Botones
+        self.setWindowTitle(f"Realizar pedidos a proveedores")
         self.Comprar.clicked.connect(self.realizar_pedido)
         self.RegresarProveedor.clicked.connect(self.regresar)
 
@@ -18,7 +18,7 @@ class VentanaPedidosProveedores(QtWidgets.QMainWindow):
         producto = self.InsNombreProduct.text().strip()
         cantidad_str = self.InscantProducto.text().strip()
 
-        # Validaciones
+        
         if not proveedor or not producto or not cantidad_str:
             QtWidgets.QMessageBox.warning(self, "Campos incompletos", "Por favor, completa todos los campos.")
             return
@@ -31,7 +31,7 @@ class VentanaPedidosProveedores(QtWidgets.QMainWindow):
             QtWidgets.QMessageBox.warning(self, "Cantidad inválida", "Introduce una cantidad válida (mayor que 0).")
             return
 
-        # Verificamos si el producto existe
+        
         info = self.controlador.obtener_info_producto(producto)
         if info:
             producto_id, _ = info

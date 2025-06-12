@@ -12,6 +12,7 @@ class VentanaSocio(QtWidgets.QMainWindow):
         self.parent = parent
         self.dao = SocioDAOJDBC()
 
+        self.setWindowTitle(f"Añadir a Socio")
         self.aceptarBoton.clicked.connect(self.registrar_socio)
         self.regresarBoton.clicked.connect(self.regresar)
 

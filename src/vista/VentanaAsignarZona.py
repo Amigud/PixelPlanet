@@ -10,7 +10,7 @@ class VentanaAsignarZona(QtWidgets.QMainWindow):
         self.empleado = empleado
         self.parent = parent
         
-        
+        self.setWindowTitle(f"Menú Zonas de Juego")
         self.asignarBoton.clicked.connect(self.abrir_asignar)
         self.eliminarBoton.clicked.connect(self.abrir_eliminar)
         self.btn_regresar.clicked.connect(self.regresar)

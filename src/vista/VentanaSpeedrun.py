@@ -16,7 +16,7 @@ class VentanaSpeedrun(QtWidgets.QMainWindow):
         self.regresarBoton.clicked.connect(self.regresar)
         
         
-        self.setWindowTitle(f"Registrar Speedrun - {self.empleado.email}")
+        self.setWindowTitle(f"Registrar Speedrun")
 
     def registrar_speedrun(self):
         """Recoge los datos del formulario y los guarda en la base de datos"""
@@ -30,7 +30,7 @@ class VentanaSpeedrun(QtWidgets.QMainWindow):
             QtWidgets.QMessageBox.warning(self, "Error", "Todos los campos son obligatorios")
             return
         
-        # Validar formato del tiempo (HH:MM:SS)
+        
         if len(tiempo.split(':')) != 3:
             QtWidgets.QMessageBox.warning(self, "Error", "Formato de tiempo inválido. Use HH:MM:SS")
             return

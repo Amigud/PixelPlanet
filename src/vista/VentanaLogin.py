@@ -9,6 +9,8 @@ class VentanaLogin(QtWidgets.QMainWindow):
         super().__init__()
         uic.loadUi("./src/Ui/Login.ui", self)
         self.controlador = ControladorLogin()
+
+        self.setWindowTitle(f"Login de la Aplicación")
         self.botonLogin.clicked.connect(self.intentar_login)
         self.ventana_mostrador = None
         self.ventana_zona_juegos = None

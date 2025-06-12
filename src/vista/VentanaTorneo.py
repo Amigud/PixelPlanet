@@ -13,7 +13,7 @@ class VentanaTorneo(QtWidgets.QMainWindow):
         self.participantes = []
         
         
-        self.setWindowTitle(f"Crear Torneo - {self.empleado.email}")
+        self.setWindowTitle(f"Crear Torneo")
         self.aceptarBoton.clicked.connect(self.agregar_participante)
         self.regresarBoton.clicked.connect(self.regresar)
         

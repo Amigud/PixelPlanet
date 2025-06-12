@@ -11,7 +11,7 @@ class VentanaElimZonaSocio(QtWidgets.QMainWindow):
         self.parent = parent
         self.controlador = ControladorZonaJuego()
         
-        
+        self.setWindowTitle(f"Eliminar a Socio de su Zona de Juego")
         self.aceptarElimBoton.clicked.connect(self.eliminar_asignacion)
         self.regresarElimBoton.clicked.connect(self.regresar)
 
