@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Disponibilidad de Productos</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../logo/logoTienda.jpeg</normaloff>../logo/logoTienda.jpeg</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(255, 120, 122);</string>
   </property>
