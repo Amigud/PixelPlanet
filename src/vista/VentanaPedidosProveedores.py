@@ -10,6 +10,7 @@ class VentanaPedidosProveedores(QtWidgets.QMainWindow):
         self.parent = parent
 
         self.setWindowTitle(f"Realizar pedidos a proveedores")
+        self.bajoStockBoton.clicked.connect(self.mostrar_stock_bajo)
         self.Comprar.clicked.connect(self.realizar_pedido)
         self.RegresarProveedor.clicked.connect(self.regresar)
 
@@ -47,6 +48,18 @@ class VentanaPedidosProveedores(QtWidgets.QMainWindow):
                 QtWidgets.QMessageBox.critical(self, "Error", "No se pudo realizar el pedido.")
         else:
             QtWidgets.QMessageBox.warning(self, "Producto no encontrado", f"No se encontró el producto '{producto}'.")
+
+    def mostrar_stock_bajo(self):
+        productos = self.controlador.obtener_productos_stock_bajo()
+        if not productos:
+            QtWidgets.QMessageBox.information(self, "Stock Crítico", "No hay productos con stock bajo.")
+            return
+        
+        mensaje = "Productos con Stock Bajo:\n\n"
+        for nombre, cantidad in productos:
+            mensaje += f"- {nombre}: {cantidad} unidades\n"
+
+        QtWidgets.QMessageBox.information(self, "Stock Crítico", mensaje)
 
     def regresar(self):
         if self.parent:

@@ -36,5 +36,9 @@ class ControladorProducto:
     
     def aumentar_stock(self, producto_id, cantidad):
         return self.dao.sumar_cantidad(producto_id, cantidad)
+    
+    def obtener_productos_stock_bajo(self, umbral=10):
+        return self.dao.obtener_productos_stock_bajo(umbral)
+
 
 

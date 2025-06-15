@@ -139,4 +139,21 @@ class ProductoDAOJDBC(ProductoDAO, Conexion):
             (cantidad, producto_id)
         )
         return cursor.rowcount > 0
+    
+    def obtener_productos_stock_bajo(self, umbral = 10) -> list:
+        cursor = self.getCursor()
+        try:
+            cursor.execute(
+                "SELECT Nombre, Cantidad FROM productos WHERE Cantidad < ?",
+                (umbral,)
+            )
+            return cursor.fetchall() 
+        except Exception as e:
+            print(f"Error al obtener productos con stock bajo: {e}")
+            return []
+        finally:
+            if cursor:
+                cursor.close()
+            self.closeConnection()
+
 

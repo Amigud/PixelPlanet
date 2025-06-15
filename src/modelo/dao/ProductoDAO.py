@@ -19,8 +19,11 @@ class ProductoDAO:
     def buscar_por_id(self, producto_id: int):
         raise NotImplementedError()
 
-    def restar_cantidad(self, producto_id: int, cantidad: int) -> bool:
+    def restar_cantidad(self, producto_id: int, cantidad: int):
         raise NotImplementedError()
     
-    def sumar_cantidad(self, producto_id: int, cantidad: int) -> bool:
+    def sumar_cantidad(self, producto_id: int, cantidad: int):
+        raise NotImplementedError()
+    
+    def obtener_productos_stock_bajo(self, umbral: int):
         raise NotImplementedError()

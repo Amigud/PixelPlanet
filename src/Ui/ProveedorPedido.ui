@@ -105,7 +105,7 @@
    <widget class="QPushButton" name="Comprar">
     <property name="geometry">
      <rect>
-      <x>140</x>
+      <x>100</x>
       <y>330</y>
       <width>180</width>
       <height>50</height>
@@ -121,7 +121,7 @@
    <widget class="QPushButton" name="RegresarProveedor">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>330</x>
       <y>330</y>
       <width>180</width>
       <height>50</height>
@@ -152,6 +152,84 @@
     <property name="maximum">
      <number>115</number>
     </property>
+   </widget>
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>260</y>
+      <width>191</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 10px;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QPushButton" name="bajoStockBoton">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>70</y>
+       <width>131</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 127); font-size: 12pt;
+border-radius:5px;
+border: 1px solid black;</string>
+     </property>
+     <property name="text">
+      <string>Bajo Stock</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>171</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Comprobar productos con</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>171</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Bajo Stock (&lt; 10 )</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <zorder>label_2</zorder>
+    <zorder>bajoStockBoton</zorder>
+    <zorder>label</zorder>
    </widget>
   </widget>
  </widget>
