@@ -83,7 +83,7 @@ border: 5px solid black;</string>
    <widget class="QPushButton" name="resenaBoton">
     <property name="geometry">
      <rect>
-      <x>380</x>
+      <x>350</x>
       <y>360</y>
       <width>211</width>
       <height>71</height>
@@ -104,15 +104,15 @@ border: 5px solid black;</string>
    <widget class="QPushButton" name="socioBoton">
     <property name="geometry">
      <rect>
-      <x>380</x>
+      <x>290</x>
       <y>220</y>
-      <width>211</width>
+      <width>161</width>
       <height>71</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>15</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -125,7 +125,7 @@ border: 5px solid black;</string>
    <widget class="QPushButton" name="productoBoton">
     <property name="geometry">
      <rect>
-      <x>380</x>
+      <x>350</x>
       <y>500</y>
       <width>211</width>
       <height>71</height>
@@ -146,7 +146,7 @@ border: 5px solid black;</string>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>140</x>
       <y>190</y>
       <width>121</width>
       <height>121</height>
@@ -168,7 +168,7 @@ border: 5px solid black;</string>
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>140</x>
       <y>340</y>
       <width>121</width>
       <height>121</height>
@@ -190,7 +190,7 @@ border: 5px solid black;</string>
    <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>130</x>
       <y>450</y>
       <width>151</width>
       <height>141</height>
@@ -207,6 +207,27 @@ border: 5px solid black;</string>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="consSocioBoton">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>220</y>
+      <width>161</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 170, 0);</string>
+    </property>
+    <property name="text">
+     <string>Consultar Socios</string>
     </property>
    </widget>
   </widget>

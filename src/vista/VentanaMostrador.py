@@ -2,6 +2,7 @@ from PyQt5 import QtWidgets, uic
 from src.vista.VentanaSocio import VentanaSocio
 from src.vista.VentanaGestionProductos import VentanaGestionProductos
 from src.vista.VentanaResena import VentanaResena
+from src.vista.VentanaConsultaSocio import VentanaConsultaSocio
 
 
 class VentanaMostrador(QtWidgets.QMainWindow):
@@ -13,6 +14,7 @@ class VentanaMostrador(QtWidgets.QMainWindow):
         self.parent = parent
 
         self.setWindowTitle(f"Menú Empleado del Mostrador")
+        self.consSocioBoton.clicked.connect(self.abrir_consultar_socio)
         self.socioBoton.clicked.connect(self.abrir_socio)
         self.productoBoton.clicked.connect(self.abrir_producto)
         self.resenaBoton.clicked.connect(self.abrir_resena)
@@ -22,6 +24,11 @@ class VentanaMostrador(QtWidgets.QMainWindow):
         self.hide()
         self.ventana_socio = VentanaSocio(self.empleado, self)
         self.ventana_socio.show()
+
+    def abrir_consultar_socio(self):
+        self.hide()
+        self.ventana_consulta = VentanaConsultaSocio(self.empleado, self)
+        self.ventana_consulta.show()
     
     def abrir_resena(self):
         self.hide()
