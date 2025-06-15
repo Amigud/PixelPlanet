@@ -140,7 +140,7 @@ class ProductoDAOJDBC(ProductoDAO, Conexion):
         )
         return cursor.rowcount > 0
     
-    def obtener_productos_stock_bajo(self, umbral = 10) -> list:
+    def obtener_productos_stock_bajo(self, umbral = 10):
         cursor = self.getCursor()
         try:
             cursor.execute(
@@ -155,5 +155,19 @@ class ProductoDAOJDBC(ProductoDAO, Conexion):
             if cursor:
                 cursor.close()
             self.closeConnection()
+
+    def eliminar_producto(self, producto_id):
+        cursor = self.getCursor()
+        try:
+            cursor.execute("DELETE FROM productos WHERE ProductoID = ?", (producto_id,))
+            return cursor.rowcount > 0
+        except Exception as e:
+            print(f"Error al eliminar producto: {e}")
+            return False
+        finally:
+            if cursor:
+                cursor.close()
+            self.closeConnection()
+
 
 

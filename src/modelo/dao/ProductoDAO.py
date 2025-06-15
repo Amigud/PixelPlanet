@@ -27,3 +27,6 @@ class ProductoDAO:
     
     def obtener_productos_stock_bajo(self, umbral: int):
         raise NotImplementedError()
+    
+    def eliminar_producto(self, producto_id: int):
+        raise NotImplementedError()

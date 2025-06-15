@@ -76,7 +76,7 @@
      <string notr="true">background-color: orange; font-size: 14pt;</string>
     </property>
     <property name="text">
-     <string>Buscar</string>
+     <string>Aceptar</string>
     </property>
    </widget>
    <widget class="QPushButton" name="RegresarProductoElim">

@@ -26,14 +26,14 @@ class VentanaEliminarProducto(QtWidgets.QMainWindow):
         if info:
             producto_id, cantidad_actual = info
 
-            # Primer mensaje: cantidad disponible
+            
             QtWidgets.QMessageBox.information(
                 self,
                 "Producto encontrado",
                 f"Producto: '{nombre}'\nID: {producto_id}\nCantidad disponible: {cantidad_actual}"
             )
 
-            # Segundo mensaje: confirmación
+            
             respuesta = QtWidgets.QMessageBox.question(
                 self,
                 "Confirmar eliminación",
@@ -49,7 +49,26 @@ class VentanaEliminarProducto(QtWidgets.QMainWindow):
                 exito = self.controlador.restar_stock(producto_id, cantidad_eliminar)
 
                 if exito:
-                    QtWidgets.QMessageBox.information(self, "Éxito", f"Se eliminaron {cantidad_eliminar} unidades de '{nombre}'.")
+                    cantidad_restante = cantidad_actual - cantidad_eliminar
+
+                    if cantidad_restante == 0:
+                        respuesta2 = QtWidgets.QMessageBox.question(
+                            self,
+                            "Producto sin unidades",
+                            f"El producto '{nombre}' se ha quedado sin unidades.\n¿Quieres eliminarlo completamente?",
+                            QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No
+                        )
+                        if respuesta2 == QtWidgets.QMessageBox.Yes:
+                            eliminado = self.controlador.eliminar_producto(producto_id)
+                            if eliminado:
+                                QtWidgets.QMessageBox.information(self, "Eliminado", "Producto eliminado.")
+                            else:
+                                QtWidgets.QMessageBox.warning(self, "Error", "No se pudo eliminar el producto.")
+                        else:
+                            QtWidgets.QMessageBox.information(self, "Información", f"El producto se mantiene con 0 unidades.")
+
+                    else:
+                        QtWidgets.QMessageBox.information(self, "Éxito", f"Se eliminaron {cantidad_eliminar} unidades de '{nombre}'.")
                 else:
                     QtWidgets.QMessageBox.critical(self, "Error", "No se pudo eliminar el producto.")
         else:

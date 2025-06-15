@@ -39,6 +39,10 @@ class ControladorProducto:
     
     def obtener_productos_stock_bajo(self, umbral=10):
         return self.dao.obtener_productos_stock_bajo(umbral)
+    
+    def eliminar_producto(self, producto_id):
+        return self.dao.eliminar_producto(producto_id)
+
 
 
 
