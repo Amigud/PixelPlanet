@@ -2,11 +2,12 @@ from src.modelo.conexion.Conexion import Conexion
 from src.modelo.vo.AsignacionZonaVO import AsignacionZonaVO
 from src.modelo.dao.AsignacionZonaDAO import AsignacionZonaDAO
 
-class AsignacionZonaDAOJDBC(AsignacionZonaDAO, Conexion):
+class AsignacionZonaDAOJDBC(AsignacionZonaDAO):
     def asignar_zona(self, asignacion: AsignacionZonaVO) -> bool:
+        conexion = Conexion()
         cursor = None
         try:
-            cursor = self.getCursor()
+            cursor = conexion.getCursor()
             cursor.execute(
                 """INSERT INTO asignzona (ZonaID, ClienteID, Horario, TraeJuego)
                 VALUES (?, ?, ?, ?)""",
@@ -19,12 +20,13 @@ class AsignacionZonaDAOJDBC(AsignacionZonaDAO, Conexion):
         finally:
             if cursor:
                 cursor.close()
-            self.closeConnection()
+            conexion.closeConnection()
 
     def eliminar_asignacion(self, zona_id: int, email_socio: str) -> bool:
+        conexion = Conexion()
         cursor = None
         try:
-            cursor = self.getCursor()
+            cursor = conexion.getCursor()
             
             cursor.execute("SELECT ClienteID FROM socios WHERE Email = ?", (email_socio,))
             resultado = cursor.fetchone()
@@ -42,12 +44,13 @@ class AsignacionZonaDAOJDBC(AsignacionZonaDAO, Conexion):
         finally:
             if cursor:
                 cursor.close()
-            self.closeConnection()
+            conexion.closeConnection()
 
     def verificar_disponibilidad(self, zona_id: int, horario: str) -> bool:
+        conexion = Conexion()
         cursor = None
         try:
-            cursor = self.getCursor()
+            cursor = conexion.getCursor()
             cursor.execute(
                 "SELECT COUNT(*) FROM asignzona WHERE ZonaID = ? AND Horario = ?",
                 (zona_id, horario)
@@ -59,12 +62,13 @@ class AsignacionZonaDAOJDBC(AsignacionZonaDAO, Conexion):
         finally:
             if cursor:
                 cursor.close()
-            self.closeConnection()
+            conexion.closeConnection()
 
     def obtener_horarios_disponibles(self, zona_id: int) -> list:
+        conexion = Conexion()
         cursor = None
         try:
-            cursor = self.getCursor()
+            cursor = conexion.getCursor()
             cursor.execute(
                 "SELECT Horario FROM asignzona WHERE ZonaID = ? ORDER BY Horario",
                 (zona_id,)
@@ -78,4 +82,4 @@ class AsignacionZonaDAOJDBC(AsignacionZonaDAO, Conexion):
         finally:
             if cursor:
                 cursor.close()
-            self.closeConnection()
+            conexion.closeConnection()

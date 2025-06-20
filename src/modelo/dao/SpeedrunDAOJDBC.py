@@ -2,12 +2,13 @@ from src.modelo.conexion.Conexion import Conexion
 from src.modelo.vo.SpeedrunVO import SpeedrunVO
 from src.modelo.dao.SpeedrunDAO import SpeedrunDAO
 
-class SpeedrunDAOJDBC(SpeedrunDAO, Conexion):
+class SpeedrunDAOJDBC(SpeedrunDAO):
     def registrar_speedrun(self, speedrun: SpeedrunVO) -> bool:
+        conexion = Conexion()
         cursor = None
         try:
     
-            self.conexion = self.createConnection()
+            self.conexion = conexion.createConnection()
             self.conexion.jconn.setAutoCommit(False)  
             
             cursor = self.conexion.cursor()
@@ -33,6 +34,6 @@ class SpeedrunDAOJDBC(SpeedrunDAO, Conexion):
                     self.conexion.jconn.setAutoCommit(True)  
                 except:
                     pass
-                self.closeConnection()
+                conexion.closeConnection()
             if cursor:
                 cursor.close()

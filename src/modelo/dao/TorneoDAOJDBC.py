@@ -2,12 +2,13 @@ from src.modelo.conexion.Conexion import Conexion
 from src.modelo.vo.TorneoVO import TorneoVO
 from src.modelo.dao.TorneoDAO import TorneoDAO
 
-class TorneoDAOJDBC(TorneoDAO, Conexion):
+class TorneoDAOJDBC(TorneoDAO):
     def crear_torneo(self, torneo: TorneoVO) -> bool:
+        conexion = Conexion()
         cursor = None
         try:
             
-            self.conexion = self.createConnection()
+            self.conexion = conexion.createConnection()
             self.conexion.jconn.setAutoCommit(False)  
             
             cursor = self.conexion.cursor()
@@ -54,6 +55,6 @@ class TorneoDAOJDBC(TorneoDAO, Conexion):
                     self.conexion.jconn.setAutoCommit(True) 
                 except:
                     pass
-                self.closeConnection()
+                conexion.closeConnection()
             if cursor:
                 cursor.close()

@@ -2,12 +2,13 @@ from src.modelo.conexion.Conexion import Conexion
 from src.modelo.dao.ProductoDAO import ProductoDAO
 from src.modelo.vo.ProductoVO import ProductoVO
 
-class ProductoDAOJDBC(ProductoDAO, Conexion):
+class ProductoDAOJDBC(ProductoDAO):
     SQL_SELECT = "SELECT ProductoID, Nombre, Descripcion, Precio, Cantidad FROM productos"
     SQL_INSERT = "INSERT INTO productos(Nombre, Descripcion, Precio, Cantidad) VALUES (?, ?, ?, ?)"
 
     def select(self) -> list[ProductoVO]:
-        cursor = self.getCursor()
+        conexion = Conexion()
+        cursor = conexion.getCursor()
         productos = []
         try:
             cursor.execute(self.SQL_SELECT)
@@ -21,11 +22,12 @@ class ProductoDAOJDBC(ProductoDAO, Conexion):
         finally:
             if cursor:
                 cursor.close()
-            self.closeConnection()
+            conexion.closeConnection()
         return productos
 
     def insert(self, producto: ProductoVO) -> int:
-        cursor = self.getCursor()
+        conexion = Conexion()
+        cursor = conexion.getCursor()
         rows = 0
         try:
             cursor.execute(
@@ -38,11 +40,12 @@ class ProductoDAOJDBC(ProductoDAO, Conexion):
         finally:
             if cursor:
                 cursor.close()
-            self.closeConnection()
+            conexion.closeConnection()
         return rows
 
     def devolver_producto(self, nombre: str, cantidad: int) -> bool:
-        cursor = self.getCursor()
+        conexion = Conexion()
+        cursor = conexion.getCursor()
         try:
             cursor.execute("SELECT Cantidad FROM productos WHERE Nombre = ?", (nombre,))
             row = cursor.fetchone()
@@ -64,10 +67,11 @@ class ProductoDAOJDBC(ProductoDAO, Conexion):
         finally:
             if cursor:
                 cursor.close()
-            self.closeConnection()
+            conexion.closeConnection()
 
     def obtener_id_y_cantidad_por_nombre(self, nombre: str):
-        cursor = self.getCursor()
+        conexion = Conexion()
+        cursor = conexion.getCursor()
         try:
             cursor.execute("SELECT ProductoID, Cantidad FROM productos WHERE Nombre = ?", (nombre,))
             return cursor.fetchone()
@@ -77,10 +81,11 @@ class ProductoDAOJDBC(ProductoDAO, Conexion):
         finally:
             if cursor:
                 cursor.close()
-            self.closeConnection()
+            conexion.closeConnection()
 
     def obtener_cantidad_por_nombre(self, nombre: str):
-        cursor = self.getCursor()
+        conexion = Conexion()
+        cursor = conexion.getCursor()
         try:
             cursor.execute("SELECT Cantidad FROM productos WHERE Nombre = ?", (nombre,))
             resultado = cursor.fetchone()
@@ -91,10 +96,11 @@ class ProductoDAOJDBC(ProductoDAO, Conexion):
         finally:
             if cursor:
                 cursor.close()
-            self.closeConnection()
+            conexion.closeConnection()
 
     def buscar_por_id(self, producto_id: int):
-        cursor = self.getCursor()
+        conexion = Conexion()
+        cursor = conexion.getCursor()
         try:
             cursor.execute("SELECT * FROM productos WHERE ProductoID = ?", (producto_id,))
             return cursor.fetchone()
@@ -104,10 +110,11 @@ class ProductoDAOJDBC(ProductoDAO, Conexion):
         finally:
             if cursor:
                 cursor.close()
-            self.closeConnection()
+            conexion.closeConnection()
 
     def restar_cantidad(self, producto_id: int, cantidad: int) -> bool:
-        cursor = self.getCursor()
+        conexion = Conexion()
+        cursor = conexion.getCursor()
         try:
             cursor.execute("SELECT Cantidad FROM productos WHERE ProductoID = ?", (producto_id,))
             resultado = cursor.fetchone()
@@ -130,18 +137,29 @@ class ProductoDAOJDBC(ProductoDAO, Conexion):
         finally:
             if cursor:
                 cursor.close()
-            self.closeConnection()
+            conexion.closeConnection()
     
     def sumar_cantidad(self, producto_id, cantidad):
-        cursor = self.getCursor()
-        cursor.execute(
-            "UPDATE productos SET Cantidad = Cantidad + ? WHERE ProductoID = ?",
-            (cantidad, producto_id)
-        )
-        return cursor.rowcount > 0
+        conexion = Conexion()
+        cursor = None
+        try:
+            cursor = conexion.getCursor()
+            cursor.execute(
+                "UPDATE productos SET Cantidad = Cantidad + ? WHERE ProductoID = ?",
+                (cantidad, producto_id)
+            )
+            return cursor.rowcount > 0
+        except Exception as e:
+            print(f"Error al sumar cantidad: {e}")
+            return False
+        finally:
+            if cursor:
+                cursor.close()
+            conexion.closeConnection()
     
     def obtener_productos_stock_bajo(self, umbral = 10):
-        cursor = self.getCursor()
+        conexion = Conexion()
+        cursor = conexion.getCursor()
         try:
             cursor.execute(
                 "SELECT Nombre, Cantidad FROM productos WHERE Cantidad < ?",
@@ -154,10 +172,11 @@ class ProductoDAOJDBC(ProductoDAO, Conexion):
         finally:
             if cursor:
                 cursor.close()
-            self.closeConnection()
+            conexion.closeConnection()
 
     def eliminar_producto(self, producto_id):
-        cursor = self.getCursor()
+        conexion = Conexion()
+        cursor = conexion.getCursor()
         try:
             cursor.execute("DELETE FROM productos WHERE ProductoID = ?", (producto_id,))
             return cursor.rowcount > 0
@@ -167,7 +186,7 @@ class ProductoDAOJDBC(ProductoDAO, Conexion):
         finally:
             if cursor:
                 cursor.close()
-            self.closeConnection()
+            conexion.closeConnection()
 
 
 

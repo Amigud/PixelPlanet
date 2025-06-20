@@ -4,7 +4,7 @@ from src.controlador.ControladorProducto import ControladorProducto
 class VentanaDisponibilidadProducto(QtWidgets.QMainWindow):
     def __init__(self, empleado=None, parent=None):
         super().__init__(parent)
-        uic.loadUi("src/Ui/DisponibilidadProductos.ui", self)  # Asegúrate que el archivo se llame exactamente así
+        uic.loadUi("src/Ui/DisponibilidadProductos.ui", self)  
         self.controlador = ControladorProducto()
         self.empleado = empleado
         self.parent = parent

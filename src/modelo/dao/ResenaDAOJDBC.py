@@ -2,14 +2,15 @@ from src.modelo.conexion.Conexion import Conexion
 from src.modelo.dao.ResenaDAO import ResenaDAO
 from src.modelo.vo.ResenaVO import ResenaVO
 
-class ResenaDAOJDBC(ResenaDAO, Conexion):
+class ResenaDAOJDBC(ResenaDAO):
     SQL_INSERT = """
     INSERT INTO resenas (Estrellas, Comentario, Fecha, CodProducto, CodEmpleado)
     VALUES (?, ?, CURDATE(), ?, ?)
     """
 
     def insertar_resena(self, resena: ResenaVO) -> bool:
-        cursor = self.getCursor()
+        conexion = Conexion()
+        cursor = conexion.getCursor()
         try:
             cursor.execute(self.SQL_INSERT, (
                 resena.estrellas,
@@ -24,4 +25,4 @@ class ResenaDAOJDBC(ResenaDAO, Conexion):
         finally:
             if cursor:
                 cursor.close()
-            self.closeConnection()
+            conexion.closeConnection()

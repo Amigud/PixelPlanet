@@ -2,11 +2,12 @@ from src.modelo.conexion.Conexion import Conexion
 from src.modelo.dao.EmpleadoDAO import EmpleadoDAO
 from src.modelo.vo.EmpleadoVO import EmpleadoVO
 
-class EmpleadoDAOJDBC(EmpleadoDAO, Conexion):
+class EmpleadoDAOJDBC(EmpleadoDAO):
     SQL_LOGIN = "SELECT EmpleadoID, Email, Rol FROM empleados WHERE Email = ? AND Contrasenia = ?"
 
     def login(self, email: str, contrasena: str) -> EmpleadoVO | None:
-        cursor = self.getCursor()
+        conexion = Conexion()
+        cursor = conexion.getCursor()
         try:
             cursor.execute(self.SQL_LOGIN, (email, contrasena))
             row = cursor.fetchone()
@@ -20,4 +21,4 @@ class EmpleadoDAOJDBC(EmpleadoDAO, Conexion):
         finally:
             if cursor:
                 cursor.close()
-            self.closeConnection()
+            conexion.closeConnection()

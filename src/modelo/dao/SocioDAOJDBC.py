@@ -2,7 +2,7 @@ from src.modelo.conexion.Conexion import Conexion
 from src.modelo.dao.SocioDAO import SocioDAO
 from src.modelo.vo.SocioVO import SocioVO
 
-class SocioDAOJDBC(SocioDAO, Conexion):
+class SocioDAOJDBC(SocioDAO):
     SQL_BUSCAR_EMAIL = "SELECT ClienteID, NombreSocio, Apellidos, Email, Telefono, FechaNacim FROM socios WHERE Email = ?"
     SQL_INSERTAR_SOCIO = """
     INSERT INTO socios (NombreSocio, Apellidos, Email, Telefono, FechaNacim)
@@ -10,7 +10,8 @@ class SocioDAOJDBC(SocioDAO, Conexion):
     """
 
     def buscar_por_email(self, email: str) -> SocioVO | None:
-        cursor = self.getCursor()
+        conexion = Conexion()
+        cursor = conexion.getCursor()
         try:
             cursor.execute(self.SQL_BUSCAR_EMAIL, (email,))
             row = cursor.fetchone()
@@ -25,10 +26,11 @@ class SocioDAOJDBC(SocioDAO, Conexion):
         finally:
             if cursor:
                 cursor.close()
-            self.closeConnection()
+            conexion.closeConnection()
     
     def insertar_socio(self, socio: SocioVO) -> bool:
-        cursor = self.getCursor()
+        conexion = Conexion()
+        cursor = conexion.getCursor()
         try:
             cursor.execute(self.SQL_INSERTAR_SOCIO, (
                 socio.nombre,
@@ -44,4 +46,4 @@ class SocioDAOJDBC(SocioDAO, Conexion):
         finally:
             if cursor:
                 cursor.close()
-            self.closeConnection()
+            conexion.closeConnection()
