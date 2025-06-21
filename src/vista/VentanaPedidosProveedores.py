@@ -26,28 +26,16 @@ class VentanaPedidosProveedores(QtWidgets.QMainWindow):
 
         try:
             cantidad = int(cantidad_str)
-            if cantidad <= 0:
-                raise ValueError
         except ValueError:
             QtWidgets.QMessageBox.warning(self, "Cantidad inválida", "Introduce una cantidad válida (mayor que 0).")
             return
 
         
-        info = self.controlador.obtener_info_producto(producto)
-        if info:
-            producto_id, _ = info
-            actualizado = self.controlador.aumentar_stock(producto_id, cantidad)
-
-            if actualizado:
-                QtWidgets.QMessageBox.information(
-                    self,
-                    "Pedido Completado",
-                    f"¡Enhorabuena!\nSe ha realizado el pedido de {cantidad} unidades de '{producto}' al proveedor '{proveedor}'."
-                )
-            else:
-                QtWidgets.QMessageBox.critical(self, "Error", "No se pudo realizar el pedido.")
+        exito, mensaje = self.controlador.realizar_pedido_proveedor(producto, proveedor, cantidad)
+        if exito:
+            QtWidgets.QMessageBox.information(self, "Pedido Completado", mensaje)
         else:
-            QtWidgets.QMessageBox.warning(self, "Producto no encontrado", f"No se encontró el producto '{producto}'.")
+            QtWidgets.QMessageBox.critical(self, "Error", mensaje)
 
     def mostrar_stock_bajo(self):
         productos = self.controlador.obtener_productos_stock_bajo()

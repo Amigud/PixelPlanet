@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtWidgets import QMessageBox
-from src.modelo.dao.ProductoDAOJDBC import ProductoDAOJDBC
+from src.controlador.ControladorProducto import ControladorProducto
 
 class VentanaDevolucion(QtWidgets.QMainWindow):
     def __init__(self, empleado, parent=None):
@@ -9,7 +9,7 @@ class VentanaDevolucion(QtWidgets.QMainWindow):
 
         self.empleado = empleado
         self.parent = parent
-        self.dao = ProductoDAOJDBC()
+        self.controlador = ControladorProducto()
 
         self.setWindowTitle(f"Realizar Devolución")
         self.aceptarBoton.clicked.connect(self.procesar_devolucion)
@@ -23,14 +23,14 @@ class VentanaDevolucion(QtWidgets.QMainWindow):
             QMessageBox.warning(self, "Error", "Todos los campos son obligatorios.")
             return
 
-        exito = self.dao.devolver_producto(nombre, cantidad)
+        exito, mensaje = self.controlador.devolver_producto(nombre, cantidad)
 
         if exito:
-            QMessageBox.information(self, "Éxito", "Devolución registrada y stock actualizado.")
+            QMessageBox.information(self, "Éxito", mensaje)
             self.nombreProdEdit.clear()
             self.cantBox.setValue(1)
         else:
-            QMessageBox.critical(self, "Error", "No se pudo procesar la devolución.")
+            QMessageBox.critical(self, "Error", mensaje)
 
     def regresar(self):
         if self.parent:

@@ -29,34 +29,15 @@ class ControladorProducto:
 
         return self.logica.registrar_producto(producto_vo)
 
-    def obtener_productos(self):
-        return self.dao.obtener_todos()
-
-    def buscar_producto_por_id(self, pid):
-        return self.dao.buscar_por_id(pid)
-
-    def actualizar_producto(self, pid, nombre, descripcion, precio):
-        try:
-            return self.dao.actualizar(pid, nombre, descripcion, float(precio))
-        except:
-            return False
-
-    def obtener_cantidad_producto(self, nombre):
-        return self.dao.obtener_cantidad_por_nombre(nombre)
-
     def obtener_info_producto(self, nombre):
         if not isinstance(nombre, str) or not nombre.strip():
             return None
         return self.logica.obtener_id_y_cantidad(nombre)
     
-    def restar_stock(self, producto_id, cantidad):
-        return self.dao.restar_cantidad(producto_id, cantidad)
-    
-    def aumentar_stock(self, producto_id, cantidad):
-        return self.dao.sumar_cantidad(producto_id, cantidad)
-    
     def obtener_productos_stock_bajo(self, umbral=10):
-        return self.dao.obtener_productos_stock_bajo(umbral)
+        if not isinstance(umbral,int) or umbral < 0:
+            return False        
+        return self.logica.obtener_productos_stock_bajo(umbral)
     
     def eliminar_producto(self, producto_id):
         return self.logica.eliminar_producto(producto_id)
@@ -79,6 +60,15 @@ class ControladorProducto:
             return False, "Cantidad inválida"
 
         return self.logica.devolver_producto(nombre.strip(), cantidad)
+    
+    def realizar_pedido_proveedor(self, nombre_producto, nombre_proveedor, cantidad):
+        if not nombre_producto.strip() or not nombre_proveedor.strip():
+            return False, "Nombre de producto o proveedor no válido."
+
+        if not isinstance(cantidad, int) or cantidad <= 0:
+            return False, "Cantidad inválida"
+
+        return self.logica.procesar_pedido_proveedor(nombre_producto.strip(), nombre_proveedor.strip(), cantidad)
 
 
 

@@ -45,3 +45,19 @@ class LogicaProducto:
             return True, f"Se añadieron {cantidad} unidades al stock del producto '{nombre}'."
         return False, "No se pudo registrar la devolución"
 
+    def procesar_pedido_proveedor(self, nombre_producto, nombre_proveedor, cantidad):
+        
+        producto_info = self.dao.obtener_id_y_cantidad_por_nombre(nombre_producto)
+        
+        if not producto_info:
+            return False, "Producto no encontrado"
+
+        producto_id, cantidad_actual = producto_info
+
+        exito = self.dao.sumar_cantidad(producto_id, cantidad)
+        if exito:
+            return True, f"Se ha actualizado el stock de '{nombre_producto}' con {cantidad} unidades."
+        return False, "Error al actualizar el stock"
+
+    def obtener_productos_stock_bajo(self, umbral):
+        return self.dao.obtener_productos_stock_bajo(umbral)
