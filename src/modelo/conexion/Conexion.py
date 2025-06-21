@@ -50,7 +50,7 @@ if __name__ == "__main__":
     c = Conexion()
     cursor = c.getCursor()
     if cursor:
-        nombre_tabla = "socios"
+        nombre_tabla = "speedruns"
             
         
         cursor.execute(f"SHOW COLUMNS FROM {nombre_tabla};")
