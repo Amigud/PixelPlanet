@@ -1,17 +1,31 @@
-from src.modelo.dao.ProductoDAOJDBC import ProductoDAOJDBC
+from src.modelo.logica.LogicaProducto import LogicaProducto
+from src.modelo.vo.ProductoVO import ProductoVO
 
 class ControladorProducto:
     def __init__(self):
-        self.dao = ProductoDAOJDBC()
+        self.logica = LogicaProducto()
 
-    def registrar_producto(self, nombre, descripcion, precio, generos):
-        try:
-            precio = float(precio)
-            producto_id = self.dao.insertar_producto(nombre, descripcion, precio)
-            self.dao.insertar_generos(producto_id, generos.split(","))
-            return True
-        except:
+    def registrar_producto(self, nombre, descripcion, precio_texto, cantidad):
+        
+        if not all([nombre.strip(), descripcion.strip(), precio_texto.strip()]):
             return False
+        
+        try:
+            precio = float(precio_texto)
+            if precio < 0 or cantidad <= 0:
+                return False
+        except ValueError:
+            return False
+        
+        producto_vo = ProductoVO(
+            id_producto=None,
+            nombre=nombre.strip(),
+            descripcion=descripcion.strip(),
+            precio=precio,
+            cantidad=cantidad
+        )
+
+        return self.logica.registrar_producto(producto_vo)
 
     def obtener_productos(self):
         return self.dao.obtener_todos()
