@@ -45,6 +45,8 @@ class ControladorProducto:
         return self.dao.obtener_cantidad_por_nombre(nombre)
 
     def obtener_info_producto(self, nombre):
+        if not isinstance(nombre, str) or not nombre.strip():
+            return None
         return self.logica.obtener_id_y_cantidad(nombre)
     
     def restar_stock(self, producto_id, cantidad):
