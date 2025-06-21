@@ -33,3 +33,15 @@ class LogicaProducto:
         
     def eliminar_producto(self, producto_id):
         return self.dao.eliminar_producto(producto_id)
+    
+    def devolver_producto(self, nombre, cantidad):
+        producto_info = self.dao.obtener_id_y_cantidad_por_nombre(nombre)
+
+        if not producto_info:
+            return False, "Producto no encontrado"
+
+        exito = self.dao.devolver_producto(nombre, cantidad)
+        if exito:
+            return True, f"Se añadieron {cantidad} unidades al stock del producto '{nombre}'."
+        return False, "No se pudo registrar la devolución"
+

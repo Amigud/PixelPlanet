@@ -70,6 +70,16 @@ class ControladorProducto:
 
         resultado, _ = self.logica.eliminar_unidades(producto_id, cantidad)
         return resultado
+    
+    def devolver_producto(self, nombre, cantidad):
+        if not isinstance(nombre, str) or not nombre.strip():
+            return False, "Nombre no válido"
+
+        if not isinstance(cantidad, int) or cantidad <= 0:
+            return False, "Cantidad inválida"
+
+        return self.logica.devolver_producto(nombre.strip(), cantidad)
+
 
 
 
