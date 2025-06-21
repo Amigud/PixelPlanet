@@ -30,3 +30,6 @@ class ProductoDAO:
     
     def eliminar_producto(self, producto_id: int):
         raise NotImplementedError()
+    
+    def obtener_cantidad_por_id(self, producto_id: int):
+        raise NotImplementedError()

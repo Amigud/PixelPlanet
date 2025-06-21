@@ -7,7 +7,7 @@ class ControladorProducto:
 
     def registrar_producto(self, nombre, descripcion, precio_texto, cantidad):
         
-        if not all([nombre.strip(), descripcion.strip(), precio_texto.strip()]):
+        if not all([nombre.strip(), precio_texto.strip()]):
             return False
         
         try:
@@ -17,10 +17,12 @@ class ControladorProducto:
         except ValueError:
             return False
         
+        descripcion_text = descripcion if descripcion else ""
+
         producto_vo = ProductoVO(
             id_producto=None,
             nombre=nombre.strip(),
-            descripcion=descripcion.strip(),
+            descripcion=descripcion_text,
             precio=precio,
             cantidad=cantidad
         )
@@ -43,7 +45,7 @@ class ControladorProducto:
         return self.dao.obtener_cantidad_por_nombre(nombre)
 
     def obtener_info_producto(self, nombre):
-        return self.dao.obtener_id_y_cantidad_por_nombre(nombre)
+        return self.logica.obtener_id_y_cantidad(nombre)
     
     def restar_stock(self, producto_id, cantidad):
         return self.dao.restar_cantidad(producto_id, cantidad)
@@ -55,7 +57,17 @@ class ControladorProducto:
         return self.dao.obtener_productos_stock_bajo(umbral)
     
     def eliminar_producto(self, producto_id):
-        return self.dao.eliminar_producto(producto_id)
+        return self.logica.eliminar_producto(producto_id)
+    
+    def eliminar_unidades(self, producto_id, cantidad):
+        if not isinstance(producto_id, int) or producto_id <= 0:
+            return False, "ID inválido"
+
+        if not isinstance(cantidad, int) or cantidad <= 0:
+            return False, "Cantidad inválida"
+
+        resultado, _ = self.logica.eliminar_unidades(producto_id, cantidad)
+        return resultado
 
 
 

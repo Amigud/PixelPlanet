@@ -29,6 +29,7 @@ class ProductoDAOJDBC(ProductoDAO):
         conexion = Conexion()
         cursor = conexion.getCursor()
         rows = 0
+        
         try:
             cursor.execute(
                 self.SQL_INSERT,
@@ -179,7 +180,7 @@ class ProductoDAOJDBC(ProductoDAO):
         cursor = conexion.getCursor()
         try:
             cursor.execute("DELETE FROM productos WHERE ProductoID = ?", (producto_id,))
-            return cursor.rowcount > 0
+            return True
         except Exception as e:
             print(f"Error al eliminar producto: {e}")
             return False
@@ -188,5 +189,20 @@ class ProductoDAOJDBC(ProductoDAO):
                 cursor.close()
             conexion.closeConnection()
 
+    def obtener_cantidad_por_id(self, producto_id: int):
+        conexion = Conexion()
+        cursor = None
+        try:
+            cursor = conexion.getCursor()
+            cursor.execute("SELECT Cantidad FROM productos WHERE ProductoID = ?", (producto_id,))
+            row = cursor.fetchone()
+            return row[0] if row else None
+        except Exception as e:
+            print(f"Error al obtener cantidad por ID: {e}")
+            return None
+        finally:
+            if cursor:
+                cursor.close()
+            conexion.closeConnection()
 
 

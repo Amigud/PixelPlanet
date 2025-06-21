@@ -11,7 +11,7 @@ class VentanaConsultaSocio(QtWidgets.QMainWindow):
         self.parent = parent
         self.controlador = ControladorSocio()
 
-        
+        self.setWindowTitle(f"Consultar Socio")
         self.aceptarBoton.clicked.connect(self.consultar_socio)
         self.regresarBoton.clicked.connect(self.regresar)
 

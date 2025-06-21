@@ -46,7 +46,7 @@ class VentanaEliminarProducto(QtWidgets.QMainWindow):
                     QtWidgets.QMessageBox.warning(self, "Error", "No puedes eliminar más productos de los disponibles.")
                     return
 
-                exito = self.controlador.restar_stock(producto_id, cantidad_eliminar)
+                exito = self.controlador.eliminar_unidades(producto_id, cantidad_eliminar)
 
                 if exito:
                     cantidad_restante = cantidad_actual - cantidad_eliminar
