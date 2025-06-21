@@ -25,7 +25,6 @@ class TorneoDAOJDBC(TorneoDAO):
             
             
             for email in torneo.participantes:
-                
                 cursor.execute("SELECT ClienteID FROM socios WHERE Email = ?", (email,))
                 resultado = cursor.fetchone()
                 if resultado:
@@ -34,6 +33,9 @@ class TorneoDAOJDBC(TorneoDAO):
                         "INSERT INTO participantes (TorneoID, ClienteID) VALUES (?, ?)",
                         (torneo_id, cliente_id)
                     )
+                else:
+                    print(f"Email no encontrado en socios: {email}")
+
             
             
             self.conexion.commit()
