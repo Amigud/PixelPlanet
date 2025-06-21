@@ -1,7 +1,6 @@
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtWidgets import QMessageBox
-from src.modelo.vo.SocioVO import SocioVO
-from src.modelo.dao.SocioDAOJDBC import SocioDAOJDBC
+from src.controlador.ControladorSocio import ControladorSocio
 
 class VentanaSocio(QtWidgets.QMainWindow):
     def __init__(self, empleado, parent=None):
@@ -10,7 +9,7 @@ class VentanaSocio(QtWidgets.QMainWindow):
 
         self.empleado = empleado
         self.parent = parent
-        self.dao = SocioDAOJDBC()
+        self.controlador = ControladorSocio()
 
         self.setWindowTitle(f"Añadir a Socio")
         self.aceptarBoton.clicked.connect(self.registrar_socio)
@@ -23,24 +22,16 @@ class VentanaSocio(QtWidgets.QMainWindow):
         telefono = self.telefonoEdit.text().strip()
         fecha_nacim = self.fechanacimEdit.date().toPyDate()
 
-        if not all([nombre, apellido, email, telefono]):
-            QMessageBox.warning(self, "Error", "Todos los campos son obligatorios.")
-            return
-
-        socio = SocioVO(
-            id=None,
-            nombre=nombre,
-            apellido=apellido,
-            email=email,
-            telefono=telefono,
-            fecha_nacimiento=fecha_nacim
+        exito, mensaje = self.controlador.registrar_socio(
+            nombre, apellido, email, telefono, fecha_nacim
         )
 
-        if self.dao.insertar_socio(socio):
-            QMessageBox.information(self, "Éxito", "Socio registrado con éxito.")
+        if exito:
+            QMessageBox.information(self, "Éxito", mensaje)
             self.limpiar_campos()
         else:
-            QMessageBox.critical(self, "Error", "No se pudo registrar el socio.")
+            QMessageBox.warning(self, "Error", mensaje)
+
 
     def limpiar_campos(self):
         self.nombreEdit.clear()
