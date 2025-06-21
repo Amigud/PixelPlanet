@@ -1,6 +1,5 @@
 from PyQt5 import QtWidgets, uic
 from src.controlador.ControladorSpeedrun import ControladorSpeedrun
-from src.modelo.vo.SpeedrunVO import SpeedrunVO
 
 class VentanaSpeedrun(QtWidgets.QMainWindow):
     def __init__(self, empleado, parent = None):

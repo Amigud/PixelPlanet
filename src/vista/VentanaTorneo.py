@@ -1,6 +1,5 @@
 from PyQt5 import QtWidgets, uic
 from src.controlador.ControladorTorneo import ControladorTorneo
-from src.modelo.vo.TorneoVO import TorneoVO
 
 class VentanaTorneo(QtWidgets.QMainWindow):
     def __init__(self, empleado, parent=None):

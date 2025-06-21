@@ -1,5 +1,4 @@
 from PyQt5 import uic, QtWidgets
-import sys
 from src.controlador.ControladorLogin import ControladorLogin
 from src.vista.VentanaZonaJuegos import VentanaZonaJuegos
 from src.vista.VentanaMostrador import VentanaMostrador
