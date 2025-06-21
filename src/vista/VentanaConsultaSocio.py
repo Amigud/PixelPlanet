@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtWidgets import QMessageBox
-from src.modelo.dao.SocioDAOJDBC import SocioDAOJDBC
+from src.controlador.ControladorSocio import ControladorSocio
 
 class VentanaConsultaSocio(QtWidgets.QMainWindow):
     def __init__(self, empleado, parent=None):
@@ -9,7 +9,7 @@ class VentanaConsultaSocio(QtWidgets.QMainWindow):
 
         self.empleado = empleado
         self.parent = parent
-        self.dao = SocioDAOJDBC()
+        self.controlador = ControladorSocio()
 
         
         self.aceptarBoton.clicked.connect(self.consultar_socio)
@@ -17,12 +17,11 @@ class VentanaConsultaSocio(QtWidgets.QMainWindow):
 
     def consultar_socio(self):
         email = self.emailEdit.text().strip()
-        if not email:
-            QMessageBox.warning(self, "Campo vacío", "Por favor, introduce un email.")
-            return
+        
+        exito, resultado = self.controlador.consultar_socio(email)
 
-        socio = self.dao.buscar_por_email(email)
-        if socio:
+        if exito:
+            socio = resultado
             mensaje = (
                 f"ID: {socio.id}\n"
                 f"Nombre: {socio.nombre}\n"
@@ -33,7 +32,7 @@ class VentanaConsultaSocio(QtWidgets.QMainWindow):
             )
             QMessageBox.information(self, "Datos del Socio", mensaje)
         else:
-            QMessageBox.warning(self, "No encontrado", "No se encontró un socio con ese email.")
+            QMessageBox.warning(self, "Error", resultado)
 
     def regresar(self):
         if self.parent:

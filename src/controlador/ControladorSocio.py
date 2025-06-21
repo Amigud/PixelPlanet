@@ -28,3 +28,18 @@ class ControladorSocio:
             return True, "Socio registrado correctamente."
         else:
             return False, "Error al registrar socio."
+    
+    def consultar_socio(self, email: str):
+
+        if not email.strip():
+            return False, "El campo email está vacío."
+
+        if '@' not in email or '.' not in email.split('@')[-1]:
+            return False, "Formato de email inválido."
+
+        socio = self.logica.consultar_socio(email.strip())
+        if socio:
+            return True, socio
+        else:
+            return False, "No se encontró ningún socio con ese email."
+

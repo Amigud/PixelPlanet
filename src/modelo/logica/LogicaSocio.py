@@ -11,3 +11,7 @@ class LogicaSocio:
             print(f"Ya existe un socio con el email {socio.email}")
             return False
         return self.dao.insertar_socio(socio)
+    
+    def consultar_socio(self, email: str):
+        return self.dao.buscar_por_email(email)
+
