@@ -38,10 +38,11 @@ class ControladorSocio:
             return False, "Formato de email inválido."
 
         resultado = self.logica.consultar_socio(email.strip())
-        if resultado is None:
-            return False, "Socio no encontrado."
 
         socio, tipo = resultado
+
+        if socio is None:
+            return False, "Socio no encontrado."
         return True, (socio, tipo)
         
     def procesar_puntos_socio(self, email_socio, precio_unitario, cantidad):
