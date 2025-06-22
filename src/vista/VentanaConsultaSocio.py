@@ -21,14 +21,15 @@ class VentanaConsultaSocio(QtWidgets.QMainWindow):
         exito, resultado = self.controlador.consultar_socio(email)
 
         if exito:
-            socio = resultado
+            socio, tipo = resultado
             mensaje = (
                 f"ID: {socio.id}\n"
                 f"Nombre: {socio.nombre}\n"
                 f"Apellidos: {socio.apellido}\n"
                 f"Email: {socio.email}\n"
                 f"Teléfono: {socio.telefono}\n"
-                f"Fecha de nacimiento: {socio.fecha_nacimiento if socio.fecha_nacimiento else 'N/D'}"
+                f"Fecha de nacimiento: {socio.fecha_nacimiento if socio.fecha_nacimiento else 'N/D'}\n"
+                f"Tipo de Socio: {tipo}\n"
             )
             QMessageBox.information(self, "Datos del Socio", mensaje)
         else:

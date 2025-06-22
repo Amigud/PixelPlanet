@@ -3,7 +3,7 @@ from src.modelo.dao.SocioDAO import SocioDAO
 from src.modelo.vo.SocioVO import SocioVO
 
 class SocioDAOJDBC(SocioDAO):
-    SQL_BUSCAR_EMAIL = "SELECT ClienteID, NombreSocio, Apellidos, Email, Telefono, FechaNacim FROM socios WHERE Email = ?"
+    SQL_BUSCAR_EMAIL = "SELECT ClienteID, NombreSocio, Apellidos, Email, Telefono, FechaNacim, Puntos FROM socios WHERE Email = ?"
     SQL_INSERTAR_SOCIO = """
     INSERT INTO socios (NombreSocio, Apellidos, Email, Telefono, FechaNacim)
     VALUES (?, ?, ?, ?, ?)
@@ -16,8 +16,8 @@ class SocioDAOJDBC(SocioDAO):
             cursor.execute(self.SQL_BUSCAR_EMAIL, (email,))
             row = cursor.fetchone()
             if row:
-                id_socio, nombre, apellido, email, telefono, fecha_nacimiento = row
-                return SocioVO(id_socio, nombre, apellido, email, telefono, fecha_nacimiento)
+                id_socio, nombre, apellido, email, telefono, fecha_nacimiento, puntos = row
+                return SocioVO(id_socio, nombre, apellido, email, telefono, fecha_nacimiento, puntos)
 
             return None
         except Exception as e:

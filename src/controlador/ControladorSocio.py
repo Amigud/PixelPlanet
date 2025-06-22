@@ -37,11 +37,12 @@ class ControladorSocio:
         if '@' not in email or '.' not in email.split('@')[-1]:
             return False, "Formato de email inválido."
 
-        socio = self.logica.consultar_socio(email.strip())
-        if socio:
-            return True, socio
-        else:
-            return False, "No se encontró ningún socio con ese email."
+        resultado = self.logica.consultar_socio(email.strip())
+        if resultado is None:
+            return False, "Socio no encontrado."
+
+        socio, tipo = resultado
+        return True, (socio, tipo)
         
     def procesar_puntos_socio(self, email_socio, precio_unitario, cantidad):
         if not email_socio.strip():

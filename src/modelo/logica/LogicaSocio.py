@@ -13,7 +13,20 @@ class LogicaSocio:
         return self.dao.insertar_socio(socio)
     
     def consultar_socio(self, email: str):
-        return self.dao.buscar_por_email(email)
+        socio = self.dao.buscar_por_email(email)
+
+        if not socio:
+            return None, "Socio no encontrado"
+        
+        puntos = socio.puntos
+        if puntos < 500:
+            tipo = "Socio Bronce"
+        elif puntos <= 1000:
+            tipo = "Socio Plata"
+        else:
+            tipo = "Socio Oro"
+
+        return socio, tipo
     
     def agregar_puntos_por_compra(self, email: str, precio_unitario: float, cantidad: int):
         socio = self.dao.buscar_por_email(email)
