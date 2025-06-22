@@ -69,6 +69,10 @@ class ControladorProducto:
             return False, "Cantidad inválida"
 
         return self.logica.procesar_pedido_proveedor(nombre_producto.strip(), nombre_proveedor.strip(), cantidad)
+    
+    def obtener_precio_producto(self, nombre):
+        return self.logica.obtener_precio_producto(nombre)
+
 
 
 

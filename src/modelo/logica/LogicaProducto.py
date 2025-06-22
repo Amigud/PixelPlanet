@@ -61,3 +61,6 @@ class LogicaProducto:
 
     def obtener_productos_stock_bajo(self, umbral):
         return self.dao.obtener_productos_stock_bajo(umbral)
+    
+    def obtener_precio_producto(self, nombre):
+        return self.dao.obtener_precio_por_nombre(nombre)

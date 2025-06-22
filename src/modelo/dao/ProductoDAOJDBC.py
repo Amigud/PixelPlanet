@@ -205,4 +205,17 @@ class ProductoDAOJDBC(ProductoDAO):
                 cursor.close()
             conexion.closeConnection()
 
-
+    def obtener_precio_por_nombre(self, nombre: str):
+        conexion = Conexion()
+        cursor = conexion.getCursor()
+        try:
+            cursor.execute("SELECT Precio FROM productos WHERE Nombre = ?", (nombre,))
+            resultado = cursor.fetchone()
+            return resultado[0] if resultado else None
+        except Exception as e:
+            print(f"Error al obtener precio: {e}")
+            return None
+        finally:
+            if cursor:
+                cursor.close()
+            conexion.closeConnection()

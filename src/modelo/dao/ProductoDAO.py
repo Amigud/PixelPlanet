@@ -33,3 +33,6 @@ class ProductoDAO:
     
     def obtener_cantidad_por_id(self, producto_id: int):
         raise NotImplementedError()
+    
+    def obtener_precio_por_nombre(self, nombre: str):
+        raise NotImplementedError()

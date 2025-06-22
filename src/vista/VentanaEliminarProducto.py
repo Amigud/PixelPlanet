@@ -1,11 +1,14 @@
 from PyQt5 import uic, QtWidgets
 from src.controlador.ControladorProducto import ControladorProducto
+from src.controlador.ControladorSocio import ControladorSocio
+
 
 class VentanaEliminarProducto(QtWidgets.QMainWindow):
     def __init__(self, empleado=None, parent=None):
         super().__init__(parent)
         uic.loadUi("src/Ui/EliminarProductos.ui", self)
         self.controlador = ControladorProducto()
+        self.controlador_socio = ControladorSocio()
         self.empleado = empleado
         self.parent = parent
 
@@ -16,6 +19,8 @@ class VentanaEliminarProducto(QtWidgets.QMainWindow):
     def buscar_y_confirmar(self):
         nombre = self.InsNombreProductoElim.text().strip()
         cantidad_eliminar = self.cantidadBox.value()
+        email_socio = self.emailSocioEdit.text().strip()
+
 
         if not nombre:
             QtWidgets.QMessageBox.warning(self, "Campo vacío", "Introduce el nombre del producto.")
@@ -50,6 +55,18 @@ class VentanaEliminarProducto(QtWidgets.QMainWindow):
 
                 if exito:
                     cantidad_restante = cantidad_actual - cantidad_eliminar
+
+                    if email_socio:
+                        precio_unitario = self.controlador.obtener_precio_producto(nombre)
+                        if precio_unitario is not None:
+                            resultado = self.controlador_socio.procesar_puntos_socio(email_socio, precio_unitario, cantidad_eliminar)
+                            if resultado:
+                                exito_puntos, mensaje_puntos = resultado
+                                if exito_puntos:
+                                    QtWidgets.QMessageBox.information(self, "Puntos socio", mensaje_puntos)
+                                else:
+                                    QtWidgets.QMessageBox.warning(self, "Puntos no sumados", mensaje_puntos)
+
 
                     if cantidad_restante == 0:
                         respuesta2 = QtWidgets.QMessageBox.question(

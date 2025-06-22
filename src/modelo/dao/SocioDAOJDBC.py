@@ -47,3 +47,33 @@ class SocioDAOJDBC(SocioDAO):
             if cursor:
                 cursor.close()
             conexion.closeConnection()
+    
+    def obtener_puntos_por_email(self, email):
+        conexion = Conexion()
+        cursor = conexion.getCursor()
+        try:
+            cursor.execute("SELECT Puntos FROM socios WHERE Email = ?", (email,))
+            resultado = cursor.fetchone()
+            return resultado[0] if resultado else None
+        except Exception as e:
+            print(f"Error al obtener puntos del socio: {e}")
+            return None
+        finally:
+            if cursor:
+                cursor.close()
+            conexion.closeConnection()
+
+    def sumar_puntos(self, email, puntos):
+        conexion = Conexion()
+        cursor = conexion.getCursor()
+        try:
+            cursor.execute("UPDATE socios SET Puntos = Puntos + ? WHERE Email = ?", (puntos, email))
+            return cursor.rowcount > 0
+        except Exception as e:
+            print(f"Error al sumar puntos: {e}")
+            return False
+        finally:
+            if cursor:
+                cursor.close()
+            conexion.closeConnection()
+

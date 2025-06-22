@@ -93,14 +93,14 @@ border: 5px solid black;</string>
     </property>
     <property name="font">
      <font>
-      <pointsize>13</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 170, 0);</string>
     </property>
     <property name="text">
-     <string>Eliminar producto</string>
+     <string>Comprar producto</string>
     </property>
    </widget>
    <widget class="QPushButton" name="consProdBoton">

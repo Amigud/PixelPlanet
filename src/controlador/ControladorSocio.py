@@ -42,4 +42,10 @@ class ControladorSocio:
             return True, socio
         else:
             return False, "No se encontró ningún socio con ese email."
+        
+    def procesar_puntos_socio(self, email_socio, precio_unitario, cantidad):
+        if not email_socio.strip():
+            return None
+        return self.logica.agregar_puntos_por_compra(email_socio.strip(), precio_unitario, cantidad)
+
 
