@@ -26,3 +26,18 @@ class ResenaDAOJDBC(ResenaDAO):
             if cursor:
                 cursor.close()
             conexion.closeConnection()
+    
+    def obtener_valoraciones_por_producto(self, producto_id):
+        conexion = Conexion()
+        cursor = conexion.getCursor()
+        try:
+            cursor.execute("SELECT Estrellas FROM resenas WHERE CodProducto = ?", (producto_id,))
+            rows = cursor.fetchall()
+            return [row[0] for row in rows]
+        except Exception as e:
+            print(f"Error al obtener valoraciones: {e}")
+            return []
+        finally:
+            if cursor:
+                cursor.close()
+            conexion.closeConnection()

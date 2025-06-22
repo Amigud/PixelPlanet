@@ -11,8 +11,20 @@ class LogicaResena:
         info = self.dao_producto.obtener_id_y_cantidad_por_nombre(nombre_producto)
         if not info:
             print("Producto no encontrado para reseña.")
-            return False
+            return False, None
 
         producto_id, _ = info
         resena = ResenaVO(estrellas, comentario, producto_id, cod_empleado)
-        return self.dao_resena.insertar_resena(resena)
+        exito = self.dao_resena.insertar_resena(resena)
+        if exito:
+            media = self.calcular_media_valoraciones(producto_id)
+            return True, media
+        return False, None
+
+    
+    def calcular_media_valoraciones(self, producto_id):
+        valoraciones = self.dao_resena.obtener_valoraciones_por_producto(producto_id)
+        if not valoraciones:
+            return 0.0
+        return round(sum(valoraciones) / len(valoraciones), 2)
+

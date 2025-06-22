@@ -20,8 +20,14 @@ class VentanaResena(QtWidgets.QMainWindow):
         comentario = self.comentEdit.text().strip()
         estrellas = self.estrellasBox.value()
 
-        if self.controlador.insertar_resena(nombre_producto, comentario, estrellas, self.empleado.id):
-            QMessageBox.information(self, "Éxito", "Reseña registrada correctamente.")
+        exito, media = self.controlador.insertar_resena(nombre_producto, comentario, estrellas, self.empleado.id)
+
+        if exito:
+            QMessageBox.information(
+                self,
+                "Éxito",
+                f"Reseña registrada correctamente.\nLa media actual de puntuaciones para '{nombre_producto}' es {media} estrellas."
+            )
             self.limpiar()
         else:
             QMessageBox.critical(self, "Error", "No se pudo registrar la reseña.")

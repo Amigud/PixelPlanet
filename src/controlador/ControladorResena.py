@@ -6,9 +6,9 @@ class ControladorResena:
 
     def insertar_resena(self, nombre_producto, comentario, estrellas, empleado_id):
         if not nombre_producto:
-            return False
+            return False, None
         if not (1 <= estrellas <= 5):
-            return False
+            return False, None
         
         comentario = comentario.strip() if comentario else ""
 
