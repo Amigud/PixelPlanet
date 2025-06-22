@@ -50,21 +50,7 @@ if __name__ == "__main__":
     c = Conexion()
     cursor = c.getCursor()
     if cursor:
-        nombre_tabla = "socios"
-            
-        
-        cursor.execute(f"SHOW COLUMNS FROM {nombre_tabla};")
-        print("\nColumnas de la tabla:")
-        for columna in cursor.fetchall():
-            print(columna[0])
-        
-        cursor.execute(f"SELECT * FROM {nombre_tabla};")
-        print("\nDatos de la tabla:")
-        
-        
-        column_names = [desc[0] for desc in cursor.description]
-        print("\t".join(column_names))
-        for registro in cursor.fetchall():
-            print("\t".join(str(valor) for valor in registro))
+        cursor.execute("SHOW TABLES;")
+        for tabla in cursor.fetchall():
+            print(tabla)
         c.closeConnection()
-    
